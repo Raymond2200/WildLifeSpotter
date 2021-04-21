@@ -1,0 +1,1 @@
+const Spotted = require('../models/spotted');
