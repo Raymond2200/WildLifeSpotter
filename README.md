@@ -35,3 +35,10 @@ Moose icon
 Deer
 Mountain Cat
 skunk
+
+Guuidelines:
+* whitespace one between each function in react as well as comment on function
+* group get and 2 space for post 
+* controller 1 white space and comment specific purpose of function
+* 4 space tabs 
+* 
