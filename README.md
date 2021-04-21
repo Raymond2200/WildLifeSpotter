@@ -1,15 +1,20 @@
 # WildLifeSpotter
+### Project team members
+* [Raymond Casgrain](https://github.com/Raymond2200)
+* [Matthew Nixon](https://github.com/mdpnixon)
+* [Logan Major](https://github.com/logan858)
+
 
 Wild life spotter:
 
 MVP:
-Google maps api
-Pin location multiple animal:
-Keep spotted archive 
-spotted after 12 hours
-if simlar type reported in area assume same update location and timer.
-auth required to create post
-Filter on map archive and regular view, my spotings
+> * [ ] Google maps api
+> * [ ] Pin location multiple animal:
+> * [ ] Keep spotted archive 
+> * [ ] spotted after 12 hours
+> * [ ] if simlar type reported in area assume same update location and timer.
+> * [ ] auth required to create post
+> * [ ] Filter on map archive and regular view, my spotings
 
 
 
