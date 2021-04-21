@@ -19,12 +19,12 @@ MVP:
 
 
 Expand:
-danger radius based of animals
-user rating
-comment section on posts
-agressiveness or danger rating
-other filter services (filter animal type, or time since spotting)
-Categories based on locations or user choice
+* danger radius based of animals
+* user rating
+* comment section on posts
+* agressiveness or danger rating
+* other filter services (filter animal type, or time since spotting)
+* Categories based on locations or user choice
 
 
 
