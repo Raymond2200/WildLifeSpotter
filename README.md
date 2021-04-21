@@ -20,3 +20,13 @@ comment section on posts
 agressiveness or danger rating
 other filter services (filter animal type, or time since spotting)
 Categories based on locations or user choice
+
+
+
+Categories:
+Dog like Icon
+Bear like Icon
+Moose icon
+Deer
+Mountain Cat
+skunk
