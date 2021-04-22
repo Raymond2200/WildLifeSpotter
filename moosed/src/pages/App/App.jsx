@@ -1,7 +1,9 @@
 import './App.css';
 import {Component} from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import AuthPage from '../../pages/AuthPage/AuthPage';
 
-class App extends Component() {
+class App extends Component {
     state = {
         user:null,
     }
@@ -22,7 +24,8 @@ class App extends Component() {
     render() {
         return (
             <div className="App">
-                Moosed
+                <h1>Moosed</h1>
+                <AuthPage setUserInState={this.setUserInState}/>    
             </div>
         );
     }

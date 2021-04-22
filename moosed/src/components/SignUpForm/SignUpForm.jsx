@@ -2,10 +2,10 @@ import { Component } from 'react';
 
 export default class SignUpForm extends Component {
   state = {
-    name: '',
-    email: '',
-    password: '',
-    confirm: '',
+    username: 'marty',
+    email: 'marty@mar.ty',
+    password: '123',
+    confirm: '123',
     error: ''
   };
 
@@ -22,11 +22,10 @@ export default class SignUpForm extends Component {
       const fetchResponse = await fetch('/api/users/signup', {
         method: 'POST',
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({name: this.state.name, email: this.state.email, password: this.state.password,})
+        body: JSON.stringify({username: this.state.username, email: this.state.email, password: this.state.password,})
       })
       
       if (!fetchResponse.ok) throw new Error('Fetch failed - Bad request')
-      
       let token = await fetchResponse.json()
       localStorage.setItem('token', token);
       
@@ -45,7 +44,7 @@ export default class SignUpForm extends Component {
         <div className="form-container">
           <form autoComplete="off" onSubmit={this.handleSubmit}>
             <label>Name</label>
-            <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required />
+            <input type="text" name="username" value={this.state.username} onChange={this.handleChange} required />
             <label>Email</label>
             <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required />
             <label>Password</label>
