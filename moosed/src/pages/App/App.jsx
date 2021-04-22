@@ -1,32 +1,45 @@
 import './App.css';
-import {Component} from 'react';
+import Map from '../../components/Map/Map'
+import { Component } from 'react'
+import { getCurrentLatLng} from '../../services/geolocation'
 import { Route, Switch, Redirect } from 'react-router-dom';
 import AuthPage from '../../pages/AuthPage/AuthPage';
 
 class App extends Component {
     state = {
+        lat: null,
+        lng: null,
         user:null,
     }
-  
     setUserInState = (incomingUserData) => {
         this.setState({ user: incomingUserData})
     }
-
-    componentDidMount() {
+    async componentDidMount () {
+        //google maps
+        const {lat, lng } = await getCurrentLatLng()
+        //auth
         let token = localStorage.getItem('token')
+        //setState for both
         if (token) {
-          // YOU DO: check expiry!
-          let userDoc = JSON.parse(atob(token.split('.')[1])).user
-          this.setState({user: userDoc})      
+            let userDoc = JSON.parse(atob(token.split('.')[1])).user
+            this.setState({
+                user: userDoc,
+                lat: lat, 
+                lng: lng
+            })      
         }
-      }
-
+    }
     render() {
         return (
-            <div className="App">
-                <h1>Moosed</h1>
-                <AuthPage setUserInState={this.setUserInState}/>    
-            </div>
+        <div className="App">
+            <h1>Moosed</h1>
+            <Map 
+                lng={this.state.lng}
+                lat={this.state.lat}
+            />
+            <br/>
+            <AuthPage setUserInState={this.setUserInState}/>
+        </div>
         );
     }
 }
