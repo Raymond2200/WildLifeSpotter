@@ -5,3 +5,10 @@
 .App-link {
   color: #61dafb;
 }
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+.button-container > div {
+  margin: 10px;
+}
