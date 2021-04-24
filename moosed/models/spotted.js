@@ -5,7 +5,7 @@ const spottedSchema = new Schema({
     animalType: String,
     lan: String,
     lon: String,
-    Description: String,
+    description: String,
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User'

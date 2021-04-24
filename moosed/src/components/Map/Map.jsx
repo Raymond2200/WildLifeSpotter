@@ -4,6 +4,7 @@ import styles from './Map.module.css';
 
 class Map extends Component {
     mapDiv = React.createRef();
+    
 
     setMap() {
         if(this.props.lat && this.props.lng) {
@@ -20,10 +21,13 @@ class Map extends Component {
             );
             new window.google.maps.Marker({
                 position: location, 
-                map: map
-            })
+                map: map,
+                draggable: true,
+                animation: window.google.maps.Animation.DROP
+            });
         }
     }
+    
     componentDidMount() {
         this.setMap()
     }
