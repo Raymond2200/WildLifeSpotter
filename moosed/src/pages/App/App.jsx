@@ -4,12 +4,17 @@ import { Component } from 'react'
 import { getCurrentLatLng} from '../../services/geolocation'
 import { Route, Switch, Redirect } from 'react-router-dom';
 import AuthPage from '../../pages/AuthPage/AuthPage';
+import MenuList from '../../components/MenuList/MenuList'
+import ToggleView from '../../components/ToggleView/ToggleView'
+import FilterSpotteds from '../../components/FilterSpotteds/FilterSpotteds'
+import AddSpot from '../../components/AddSpot/AddSpot'
 
 class App extends Component {
     state = {
         lat: null,
         lng: null,
         user:null,
+        spotteds: [],
     }
     setUserInState = (incomingUserData) => {
         this.setState({ user: incomingUserData})
@@ -32,13 +37,25 @@ class App extends Component {
     render() {
         return (
         <div className="App">
-            <h1>Moosed</h1>
+            <h2>Moose on the Loose</h2>
+            <MenuList/>
             <Map 
                 lng={this.state.lng}
                 lat={this.state.lat}
             />
-            <br/>
+            
+            <div className="button-container">
+                <ToggleView/>
+                <FilterSpotteds 
+                    setSpotteds={
+                        (spotteds) => this.setState(
+                            {spotteds})}
+                />
+                <AddSpot/>
+            </div>
+            
             <AuthPage setUserInState={this.setUserInState}/>
+            <br/>
         </div>
         );
     }

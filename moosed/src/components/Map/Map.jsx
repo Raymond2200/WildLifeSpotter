@@ -16,7 +16,8 @@ class Map extends Component {
                     zoom: this.props.zoom || 12,
                     center: location, 
                     disableDefaultUI: true,
-                    styles: mapStyle
+                    styles: mapStyle,
+                    gestureHandling: "greedy"
                 }
             );
             new window.google.maps.Marker({
