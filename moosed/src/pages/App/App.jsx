@@ -4,6 +4,7 @@ import { Component } from 'react'
 import { getCurrentLatLng} from '../../services/geolocation'
 import { Route, Switch, Redirect } from 'react-router-dom';
 import AuthPage from '../../pages/AuthPage/AuthPage';
+import MenuList from '../../components/MenuList/MenuList'
 
 class App extends Component {
     state = {
@@ -32,7 +33,8 @@ class App extends Component {
     render() {
         return (
         <div className="App">
-            <h1>Moosed</h1>
+            <h2>Moose on the Loose</h2>
+            <MenuList/>
             <Map 
                 lng={this.state.lng}
                 lat={this.state.lat}
