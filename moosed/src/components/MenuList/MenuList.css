@@ -1,0 +1,51 @@
+.menu-icon {
+    position: fixed;
+    top: 5px;
+    left: 5px;
+    width: 13%;
+    height: 7%;
+    z-index: 999;
+    transition: 0.3s;
+}
+#tested {
+    border: 1px dotted black;
+}
+@media only screen and (min-width: 500px) {
+    .menu-icon {
+        width:8%;
+        height: 6%;
+    }
+}
+@media only screen and (min-width: 1000px) {
+    .menu-icon {
+        width:5%;
+    }
+}
+@media only screen and (max-height: 450px) {
+    .menu-icon {
+        height:15%;
+    }
+}
+.menu-bar-one {
+    height: 6px;
+    width: 80%;
+    background-color: rgba(37, 37, 37, 0.9);
+    margin: 5px 5px 5px 0;
+    border-radius: 3px;
+}
+.menu-bar-two {
+    height: 6px;
+    width: 50%;
+    background-color: rgba(37, 37, 37, 0.9);
+    margin: 5px 5px 5px 0;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+.menu-bar-three {
+    height: 6px;
+    width: 60%;
+    background-color: rgba(37, 37, 37, 0.9);
+    margin: 5px 5px 5px 0;
+    border-radius: 3px;
+    transition: 0.3s;
+}
