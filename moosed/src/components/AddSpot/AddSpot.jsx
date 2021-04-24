@@ -1,14 +1,14 @@
 import { Component } from 'react';
 import Button from '@material-ui/core/Button';
 
-class FilterSpotteds extends Component {
+class AddSpot extends Component {
     render() {
         return (
             <div>
-                <Button variant="contained">Filter</Button>
+                <Button variant="contained">Add Spot</Button>
             </div>
         )
     }
 }
 
-export default FilterSpotteds;
+export default AddSpot;

@@ -1,14 +1,14 @@
 import { Component } from 'react';
 import Button from '@material-ui/core/Button';
 
-class FilterSpotteds extends Component {
+class ToggleView extends Component {
     render() {
         return (
             <div>
-                <Button variant="contained">Filter</Button>
+                <Button variant="contained">Toggle View</Button>
             </div>
         )
     }
 }
 
-export default FilterSpotteds;
+export default ToggleView;

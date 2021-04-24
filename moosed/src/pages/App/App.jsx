@@ -5,7 +5,9 @@ import { getCurrentLatLng} from '../../services/geolocation'
 import { Route, Switch, Redirect } from 'react-router-dom';
 import AuthPage from '../../pages/AuthPage/AuthPage';
 import MenuList from '../../components/MenuList/MenuList'
+import ToggleView from '../../components/ToggleView/ToggleView'
 import FilterSpotteds from '../../components/FilterSpotteds/FilterSpotteds'
+import AddSpot from '../../components/AddSpot/AddSpot'
 
 class App extends Component {
     state = {
@@ -41,20 +43,19 @@ class App extends Component {
                 lng={this.state.lng}
                 lat={this.state.lat}
             />
-            <br/>
-            <AuthPage setUserInState={this.setUserInState}/>
-            <br/>
-            {/* temporary buttons, will all be components */}
-            <div>
-                <button>one</button>
+            
+            <div className="button-container">
+                <ToggleView/>
                 <FilterSpotteds 
                     setSpotteds={
                         (spotteds) => this.setState(
                             {spotteds})}
                 />
-                <button>three</button>
-            </div><br/>
+                <AddSpot/>
+            </div>
             
+            <AuthPage setUserInState={this.setUserInState}/>
+            <br/>
         </div>
         );
     }
