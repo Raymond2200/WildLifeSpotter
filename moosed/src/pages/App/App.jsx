@@ -5,12 +5,14 @@ import { getCurrentLatLng} from '../../services/geolocation'
 import { Route, Switch, Redirect } from 'react-router-dom';
 import AuthPage from '../../pages/AuthPage/AuthPage';
 import MenuList from '../../components/MenuList/MenuList'
+import FilterSpotteds from '../../components/FilterSpotteds/FilterSpotteds'
 
 class App extends Component {
     state = {
         lat: null,
         lng: null,
         user:null,
+        spotteds: [],
     }
     setUserInState = (incomingUserData) => {
         this.setState({ user: incomingUserData})
@@ -41,6 +43,18 @@ class App extends Component {
             />
             <br/>
             <AuthPage setUserInState={this.setUserInState}/>
+            <br/>
+            {/* temporary buttons, will all be components */}
+            <div>
+                <button>one</button>
+                <FilterSpotteds 
+                    setSpotteds={
+                        (spotteds) => this.setState(
+                            {spotteds})}
+                />
+                <button>three</button>
+            </div><br/>
+            
         </div>
         );
     }
