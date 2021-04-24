@@ -34,7 +34,6 @@ class Map extends Component {
     render () {
         return (
             <div>
-                map component here:<br/>
                 <div ref={this.mapDiv} className={styles.Map}></div>
             </div>
         )
