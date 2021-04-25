@@ -14,7 +14,12 @@ class App extends Component {
         lat: null,
         lng: null,
         user:null,
-        spotteds: [],
+        spotteds: [
+            {animalType: 'Moose', lat: 43.239818899999996, lng: -79.8139712, description: "there's a damn moose on the loose!"},
+            {animalType: 'Skunk', lat: 43.249818899999996, lng: -79.8239712, description: "i think i smell a skunk"},
+            {animalType: 'Wolf', lat: 43.259818899999996, lng: -79.8339712, description: "ahhh it's a wolf!"},
+            {animalType: 'Deer', lat: 43.269818899999996, lng: -79.8439712, description: "oh look, bambi!"},
+        ],
     }
 
     setUserInState = (incomingUserData) => {
@@ -44,6 +49,7 @@ class App extends Component {
             <Map 
                 lng={this.state.lng}
                 lat={this.state.lat}
+                spotteds={this.state.spotteds}
             />
             
             <div className="button-container">
