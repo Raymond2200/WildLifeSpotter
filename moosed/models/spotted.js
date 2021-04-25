@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const spottedSchema = new Schema({
     animalType: String,
-    lan: String,
-    lon: String,
+    lat: Number,
+    lng: Number,
     description: String,
     user: {
         type: Schema.Types.ObjectId,
