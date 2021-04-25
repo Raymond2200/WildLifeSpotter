@@ -59,7 +59,7 @@ class App extends Component {
                         (spotteds) => this.setState(
                             {spotteds})}
                 />
-                <AddSpot/>
+                <AddSpot user={this.state.user}/>
             </div>
             
             <AuthPage setUserInState={this.setUserInState}/>
