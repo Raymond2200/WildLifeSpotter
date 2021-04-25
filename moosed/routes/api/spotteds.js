@@ -3,11 +3,8 @@ const router = express.Router();
 const spottedCtrl = require('../../controllers/spotteds');
 
 
-
-
-
-
-
+router.use(require('../../config/auth'));
+router.post('/new', spottedCtrl.create);
 
 //filter routes
 router.get('/archived', spottedCtrl.archivedSpots)
