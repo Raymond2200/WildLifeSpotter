@@ -1,4 +1,5 @@
 const Spotted = require('../models/spotted');
+const User = require('../models/user');
 
 module.exports = {
     create,
@@ -42,4 +43,4 @@ function recentSpots (req, res) {
     Spotted.find({}, function(err, posts) {
         res.json(posts)
     })
-const User = require('../models/user');
+}
