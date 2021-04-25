@@ -12,6 +12,24 @@ function FilterSpotteds() {
     const handleClose = () => {
         setAnchorEl(null)
     }
+    const archivedSpots = async () => {
+        handleClose()
+        await fetch("/api/spotteds/archived")
+            .then((res) => res.json())
+            .then(data => console.log(data))
+    }
+    const mySpots = async () => {
+        handleClose()
+        await fetch("/api/spotteds/myspots")
+            .then((res) => res.json())
+            .then(data => console.log(data))
+    }
+    const recentSpots = async () => {
+        handleClose()
+        await fetch("/api/spotteds/recentspots")
+            .then((res) => res.json())
+            .then(data => console.log(data))
+    }
 
     return (
         <div>
@@ -27,14 +45,14 @@ function FilterSpotteds() {
             <Menu
                 id="simple-menu"
                 anchorEl={anchorEl}
-                transformOrigin={{ horizontal: 50 }}
+                transformOrigin={{ horizontal: 50, vertical: 0 }}
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <MenuItem onClick={handleClose}>Archived Sightings</MenuItem>
-                <MenuItem onClick={handleClose}>My Sightings</MenuItem>
-                <MenuItem onClick={handleClose}>Recent Sightings</MenuItem>
+                <MenuItem onClick={archivedSpots}>Archived Sightings</MenuItem>
+                <MenuItem onClick={mySpots}>My Sightings</MenuItem>
+                <MenuItem onClick={recentSpots}>Recent Sightings</MenuItem>
             </Menu>
         </div>
     )

@@ -3,7 +3,7 @@ export default [
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#ebe3cd"
+        "color": "#e6e4df"
       }
     ]
   },
@@ -80,7 +80,7 @@ export default [
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#dfd2ae"
+        "color": "#8cbd9a"
       }
     ]
   },
@@ -97,6 +97,7 @@ export default [
     "elementType": "geometry",
     "stylers": [
       {
+        "visibility": "on",
         "color": "#dfd2ae"
       }
     ]
@@ -124,7 +125,7 @@ export default [
     "elementType": "geometry.fill",
     "stylers": [
       {
-        "color": "#a5b076"
+        "color": "#b6dbbe"
       }
     ]
   },
@@ -138,6 +139,52 @@ export default [
     ]
   },
   {
+    "featureType": "poi.business",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#c47676"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.business",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#c47676"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.medical",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#a36067"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.school",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#89aecc"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.sports_complex",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#f2ad7e"
+      }
+    ]
+  },
+  
+  {
     "featureType": "road",
     "stylers": [
       {
@@ -150,7 +197,7 @@ export default [
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#f5f1e6"
+        "color": "#d1d1d1"
       }
     ]
   },
@@ -177,7 +224,7 @@ export default [
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#fdfcf8"
+        "color": "#d1d1d1"
       }
     ]
   },
@@ -186,7 +233,7 @@ export default [
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#f8c967"
+        "color": "#707070"
       }
     ]
   },
@@ -195,7 +242,7 @@ export default [
     "elementType": "geometry.stroke",
     "stylers": [
       {
-        "color": "#e9bc62"
+        "color": "#d1d1d1"
       }
     ]
   },
@@ -204,7 +251,7 @@ export default [
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#e98d58"
+        "color": "#707070"
       }
     ]
   },
@@ -213,7 +260,7 @@ export default [
     "elementType": "geometry.stroke",
     "stylers": [
       {
-        "color": "#db8555"
+        "color": "#d1d1d1"
       }
     ]
   },
@@ -275,7 +322,7 @@ export default [
     "elementType": "geometry.fill",
     "stylers": [
       {
-        "color": "#b9d3c2"
+        "color": "#49a0cc"
       }
     ]
   },

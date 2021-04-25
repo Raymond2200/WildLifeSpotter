@@ -1,8 +1,10 @@
 const Spotted = require('../models/spotted');
-const User = require('../models/user');
 
 module.exports = {
-    create
+    create,
+    archivedSpots,
+    mySpots,
+    recentSpots,
 }
 
 async function create(req, res) {
@@ -20,3 +22,24 @@ async function create(req, res) {
         console.log('backend fail')
     }
 }
+
+function archivedSpots(req, res) {
+    console.log("archived spots hit")
+    Spotted.find({}, function(err, posts) {
+        res.json(posts)
+    })
+}
+
+function mySpots (req, res) {
+    console.log("my spots hit")
+    Spotted.find({}, function(err, posts) {
+        res.json(posts)
+    })
+}
+
+function recentSpots (req, res) {
+    console.log("recent spots hit")
+    Spotted.find({}, function(err, posts) {
+        res.json(posts)
+    })
+const User = require('../models/user');
