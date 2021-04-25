@@ -1,6 +1,7 @@
 import './App.css';
 import Map from '../../components/Map/Map'
 import React, { Component } from 'react'
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { getCurrentLatLng} from '../../services/geolocation'
 import AuthPage from '../../pages/AuthPage/AuthPage';
 import MenuList from '../../components/MenuList/MenuList'
@@ -46,24 +47,32 @@ class App extends Component {
         <div className="App">
             <h2>Moose on the Loose</h2>
             <MenuList/>
-            <Map 
-                lng={this.state.lng}
-                lat={this.state.lat}
-                spotteds={this.state.spotteds}
-            />
-            
-            <div className="button-container">
-                <ToggleView/>
-                <FilterSpotteds 
-                    setSpotteds={
-                        (spotteds) => this.setState(
-                            {spotteds})}
+            <Switch>
+            <Route path='/login-signup' render={(props) => (
+                <>
+                <AuthPage {...props} setUserInState={this.setUserInState}/>
+                <br/>
+                </>
+            )}/>
+            <Route path='/' render={(props) => (
+                <>
+                <Map
+                    {...props}
+                    lng={this.state.lng}
+                    lat={this.state.lat}
+                    spotteds={this.state.spotteds}
                 />
-                <AddSpot/>
-            </div>
-            
-            <AuthPage setUserInState={this.setUserInState}/>
-            <br/>
+                <div className="button-container">
+                    <ToggleView/>
+                    <FilterSpotteds 
+                        setSpotteds={(spotteds) => this.setState({spotteds})}
+                    />
+                    <AddSpot/>
+                </div>
+                </>
+            )}/>
+            <Redirect to="/" />
+        </Switch>  
         </div>
         );
     }
