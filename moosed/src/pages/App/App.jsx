@@ -30,6 +30,12 @@ class App extends Component {
     async componentDidMount () {
         //google maps
         const {lat, lng } = await getCurrentLatLng()
+        if ({lat, lng}) {
+            this.setState({
+                lat: lat, 
+                lng: lng
+            }) 
+        }
         //auth
         let token = localStorage.getItem('token')
         //setState for both
@@ -37,8 +43,6 @@ class App extends Component {
             let userDoc = JSON.parse(atob(token.split('.')[1])).user
             this.setState({
                 user: userDoc,
-                lat: lat, 
-                lng: lng
             })      
         }
     }
@@ -46,6 +50,7 @@ class App extends Component {
         return (
         <div className="App">
             <h2>Moose on the Loose</h2>
+            {/* <img src="logo.svg"></img> */}
             <MenuList/>
             <Switch>
             <Route path='/login-signup' render={(props) => (
