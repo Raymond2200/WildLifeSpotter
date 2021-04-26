@@ -1,10 +1,24 @@
 import { Component } from 'react';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import { withStyles } from "@material-ui/core/styles";
+import { Redirect } from 'react-router-dom';
 
-export default class LoginForm extends Component {
+const styles = theme => ({
+  root: {
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
+});
+
+class LoginForm extends Component {
   state = {
     email: '',
     password: '',
-    error: ''
+    error: '',
+    doRedirect: false
   };
 
   handleChange = (evt) => {
@@ -30,6 +44,7 @@ export default class LoginForm extends Component {
 
       const userDoc = JSON.parse(atob(token.split('.')[1])).user;
       this.props.setUserInState(userDoc)
+      if (this.props.user !== null) this.setState({ doRedirect: true });
     } catch (err) {
       console.log("LoginForm error", err)
       this.setState({ error: 'Login Failed - Try Again' });
@@ -37,15 +52,39 @@ export default class LoginForm extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
       <div>
-        <div className="form-container" onSubmit={this.handleSubmit}>
-          <form autoComplete="off" >
-            <label>Email</label>
-            <input type="text" name="email" value={this.state.email} onChange={this.handleChange} required />
-            <label>Password</label>
-            <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
-            <button type="submit">LOG IN</button>
+        { this.state.doRedirect && <Redirect to="/" /> }
+        <div className="form-container">
+          <form autoComplete="off" className={classes.root}  onSubmit={this.handleSubmit}>
+          <TextField
+              id="outlined-helperText"
+              label="Email"
+              variant="outlined"
+              name="email"
+              type="email"
+              value={this.state.email}
+              onChange={this.handleChange}
+              required
+          />
+          <TextField
+              id="outlined-helperText"
+              label="Password"
+              variant="outlined"
+              name="password"
+              type="password"
+              value={this.state.password}
+              onChange={this.handleChange}
+              required
+          />
+          <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+          >
+              LOGIN
+          </Button>
           </form>
         </div>
         <p className="error-message">&nbsp;{this.state.error}</p>
@@ -53,3 +92,5 @@ export default class LoginForm extends Component {
     );
   }
 }
+
+export default withStyles(styles, { withTheme: true })(LoginForm)

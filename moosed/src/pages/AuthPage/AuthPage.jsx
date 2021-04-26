@@ -17,8 +17,8 @@ export default class AuthPage extends Component {
           </h3>
         </div>
         {this.state.showLogin ? 
-        <LoginForm setUserInState={this.props.setUserInState}/> : 
-        <SignUpForm setUserInState={this.props.setUserInState} />}
+        <LoginForm user={this.props.user} setUserInState={this.props.setUserInState}/> : 
+        <SignUpForm user={this.props.user} setUserInState={this.props.setUserInState} />}
       </main>
     );
   }
