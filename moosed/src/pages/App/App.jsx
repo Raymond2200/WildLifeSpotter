@@ -1,5 +1,6 @@
 import './App.css';
 import Map from '../../components/Map/Map'
+import ListPage from '../ListPage/ListPage'
 import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { getCurrentLatLng} from '../../services/geolocation'
@@ -8,14 +9,13 @@ import MenuList from '../../components/MenuList/MenuList';
 import ToggleView from '../../components/ToggleView/ToggleView';
 import FilterSpotteds from '../../components/FilterSpotteds/FilterSpotteds';
 import AddSpot from '../../components/AddSpot/AddSpot';
-import ListPage from '../ListPage/ListPage';
-
 
 class App extends Component {
     state = {
         lat: null,
         lng: null,
         user:null,
+        listview: false,
         spotteds: [
             {animalType: 'Moose', lat: 43.239818899999996, lng: -79.8139712, description: "there's a damn moose on the loose!"},
             {animalType: 'Skunk', lat: 43.249818899999996, lng: -79.8239712, description: "i think i smell a skunk"},
@@ -56,6 +56,9 @@ class App extends Component {
             {/* <img src="logo.svg"></img> */}
             <MenuList userState={this.state.user}/>
             <Switch>
+            {/* <Route path='/list' render={(props) => (
+               <ListPage/> 
+            )}/> */}
             <Route path='/login-signup' render={(props) => (
                 <>
                 <AuthPage {...props} user={this.state.user} setUserInState={this.setUserInState}/>
@@ -65,19 +68,26 @@ class App extends Component {
             <Route path='/logout' render={this.handleLogout}/>
             <Route path='/' render={(props) => (
                 <>
-                <Map
-                    {...props}
-                    lng={this.state.lng}
-                    lat={this.state.lat}
-                    spotteds={this.state.spotteds}
-                />
-                <div className="button-container">
-                    <ToggleView/>
-                    <FilterSpotteds 
-                        setSpotteds={(spotteds) => this.setState({spotteds})}
-                    />
-                    <AddSpot user={this.state.user} />
-                </div>
+                    {!this.state.listview ? (
+                        <Map
+                            {...props}
+                            lng={this.state.lng}
+                            lat={this.state.lat}
+                            spotteds={this.state.spotteds}/>
+                    ) : ( 
+                        <ListPage
+                            {...props}
+                            lng={this.state.lng}
+                            lat={this.state.lat}
+                            spotteds={this.state.spotteds}/>
+                    )}
+                    <div className="button-container">
+                        <ToggleView setListView={(listview) => this.setState({listview})}/>
+                        <FilterSpotteds 
+                            setSpotteds={(spotteds) => this.setState({spotteds})}
+                        />
+                        <AddSpot user={this.state.user} />
+                    </div>
                 </>
             )}/>
             <Redirect to="/" />
