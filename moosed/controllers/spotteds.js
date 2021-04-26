@@ -30,14 +30,11 @@ async function create(req, res) {
 
 async function nearMeSpots(req, res) {
     try{
-        console.log("step 1")
-        console.log(req.params.lng)
-        console.log(req.params.lat)
         let spots = await Spotted.find(
             {
                 location:
                 {$near:
-                    {$geometry: {type: "Point", coordinates: [-77.835251, 45.910191]},
+                    {$geometry: {type: "Point", coordinates: [req.params.lng, req.params.lat]},
                     $maxDistance: 100000,
                     $minDistance: 0
                     }
