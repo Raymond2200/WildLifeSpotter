@@ -67,15 +67,12 @@ class App extends Component {
                     <FilterSpotteds 
                         setSpotteds={(spotteds) => this.setState({spotteds})}
                     />
-                    <AddSpot/>
+                    <AddSpot user={this.state.user} />
                 </div>
                 </>
             )}/>
             <Redirect to="/" />
-        </Switch>  
-                <AddSpot user={this.state.user}/>
-            </div>
-
+        </Switch>
         </div>
         );
     }
