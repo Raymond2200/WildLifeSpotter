@@ -46,6 +46,7 @@ class App extends Component {
         return (
         <div className="App">
             <h2>Moose on the Loose</h2>
+            {/* <img src="logo.svg"></img> */}
             <MenuList/>
             <Switch>
             <Route path='/login-signup' render={(props) => (
