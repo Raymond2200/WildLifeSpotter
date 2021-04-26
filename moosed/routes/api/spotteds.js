@@ -11,6 +11,7 @@ router.use(require('../../config/auth'));
 
 //filter route
 router.get('/myspots', spottedCtrl.mySpots)
+router.get('/me/:lng/:lat', spottedCtrl.nearMeSpots)
 
 //New spot route
 router.post('/new', spottedCtrl.create);
