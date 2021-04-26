@@ -50,7 +50,7 @@ class App extends Component {
             <Switch>
             <Route path='/login-signup' render={(props) => (
                 <>
-                <AuthPage {...props} setUserInState={this.setUserInState}/>
+                <AuthPage {...props} user={this.state.user} setUserInState={this.setUserInState}/>
                 <br/>
                 </>
             )}/>

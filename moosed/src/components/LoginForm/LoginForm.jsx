@@ -2,6 +2,7 @@ import { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from "@material-ui/core/styles";
+import { Redirect } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
@@ -16,7 +17,8 @@ class LoginForm extends Component {
   state = {
     email: '',
     password: '',
-    error: ''
+    error: '',
+    doRedirect: false
   };
 
   handleChange = (evt) => {
@@ -42,6 +44,7 @@ class LoginForm extends Component {
 
       const userDoc = JSON.parse(atob(token.split('.')[1])).user;
       this.props.setUserInState(userDoc)
+      if (this.props.user !== null) this.setState({ doRedirect: true });
     } catch (err) {
       console.log("LoginForm error", err)
       this.setState({ error: 'Login Failed - Try Again' });
@@ -52,6 +55,7 @@ class LoginForm extends Component {
     const { classes } = this.props;
     return (
       <div>
+        { this.state.doRedirect && <Redirect to="/" /> }
         <div className="form-container">
           <form autoComplete="off" className={classes.root}  onSubmit={this.handleSubmit}>
           <TextField
@@ -81,11 +85,6 @@ class LoginForm extends Component {
           >
               LOGIN
           </Button>
-            {/* <label>Email</label>
-            <input type="text" name="email" value={this.state.email} onChange={this.handleChange} required />
-            <label>Password</label>
-            <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
-            <button type="submit">LOG IN</button> */}
           </form>
         </div>
         <p className="error-message">&nbsp;{this.state.error}</p>

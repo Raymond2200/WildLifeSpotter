@@ -2,6 +2,7 @@ import { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from "@material-ui/core/styles";
+import { Redirect } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
@@ -18,7 +19,8 @@ class SignUpForm extends Component {
     email: '',
     password: '',
     confirm: '',
-    error: ''
+    error: '',
+    doRedirect: false
   };
 
   handleChange = (evt) => {
@@ -43,6 +45,7 @@ class SignUpForm extends Component {
       
       const userDoc = JSON.parse(atob(token.split('.')[1])).user;
       this.props.setUserInState(userDoc)
+      if (this.props.user !== null) this.setState({ doRedirect: true });
     } catch (err) {
       console.log("SignupForm error", err)
       this.setState({ error: 'Sign Up Failed - Try Again' });
@@ -54,6 +57,7 @@ class SignUpForm extends Component {
     const { classes } = this.props;
     return (
       <div>
+        { this.state.doRedirect && <Redirect to="/" /> }
         <div className="form-container">
           <form className={classes.root} autoComplete="off" onSubmit={this.handleSubmit}>
           <TextField
@@ -103,15 +107,6 @@ class SignUpForm extends Component {
           >
               SIGN UP
           </Button>
-            {/* <label>Name</label>
-            <input type="text" name="username" value={this.state.username} onChange={this.handleChange} required />
-            <label>Email</label>
-            <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required />
-            <label>Password</label>
-            <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
-            <label>Confirm</label>
-            <input type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} required />
-            <button type="submit" disabled={disable}>SIGN UP</button> */}
           </form>
         </div>
         <p className="error-message">&nbsp;{this.state.error}</p>
