@@ -19,8 +19,10 @@ class App extends Component {
         spotteds: [
             {animalType: 'Moose', lat: 43.239818899999996, lng: -79.8139712, description: "there's a damn moose on the loose!"},
             {animalType: 'Skunk', lat: 43.249818899999996, lng: -79.8239712, description: "i think i smell a skunk"},
-            {animalType: 'Wolf', lat: 43.259818899999996, lng: -79.8339712, description: "ahhh it's a wolf!"},
+            {animalType: 'Wolf', lat: 43.259818899999996, lng: -79.8339712, description: "ahhh it's a wolf! really super long test description to test max width settings okay cool"},
             {animalType: 'Deer', lat: 43.269818899999996, lng: -79.8439712, description: "oh look, bambi!"},
+            {animalType: 'Bear', lat: 43.279818899999996, lng: -79.8539712, description: "it's winnie the pooh!"},
+            {animalType: 'Cougar', lat: 43.289818899999996, lng: -79.8639712, description: "meow"},
         ],
     }
 
