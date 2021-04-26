@@ -1,8 +1,8 @@
 import './App.css';
-import Map from '../../components/Map/Map';
-import React, { Component } from 'react';
-import { getCurrentLatLng} from '../../services/geolocation';
+import Map from '../../components/Map/Map'
+import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom';
+import { getCurrentLatLng} from '../../services/geolocation'
 import AuthPage from '../../pages/AuthPage/AuthPage';
 import MenuList from '../../components/MenuList/MenuList';
 import ToggleView from '../../components/ToggleView/ToggleView';
@@ -45,37 +45,34 @@ class App extends Component {
     render() {
         return (
         <div className="App">
+            <h2>Moose on the Loose</h2>
+            <MenuList/>
             <Switch>
-                <MenuList/>
-                <Route path='/list' render={(props) => (
-                    <>
-                    <ListPage/>
-                    </>
-                )}/>
-                <Route path='/' render={(props) => (
-                    <>
-                    <h2>Moose on the Loose</h2>
-                    <Map 
-                        lng={this.state.lng}
-                        lat={this.state.lat}
-                        spotteds={this.state.spotteds}
+            <Route path='/login-signup' render={(props) => (
+                <>
+                <AuthPage {...props} user={this.state.user} setUserInState={this.setUserInState}/>
+                <br/>
+                </>
+            )}/>
+            <Route path='/' render={(props) => (
+                <>
+                <Map
+                    {...props}
+                    lng={this.state.lng}
+                    lat={this.state.lat}
+                    spotteds={this.state.spotteds}
+                />
+                <div className="button-container">
+                    <ToggleView/>
+                    <FilterSpotteds 
+                        setSpotteds={(spotteds) => this.setState({spotteds})}
                     />
-                    
-                    <div className="button-container">
-                        <ToggleView/>
-                        <FilterSpotteds 
-                            setSpotteds={
-                                (spotteds) => this.setState(
-                                    {spotteds})}
-                        />
-                        <AddSpot user={this.state.user}/>
-                    </div>
-                    
-                    <AuthPage setUserInState={this.setUserInState}/>
-                    <br/>
-                    </>
-                )}/>
-            </Switch>
+                    <AddSpot user={this.state.user} />
+                </div>
+                </>
+            )}/>
+            <Redirect to="/" />
+        </Switch>
         </div>
         );
     }

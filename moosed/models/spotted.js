@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const spottedSchema = new Schema({
     animalType: String,
-    coordiantes: mongoose.Schema.Types.Point,
+    location: mongoose.Schema.Types.Point,
     description: String,
     user: {
         type: Schema.Types.ObjectId,

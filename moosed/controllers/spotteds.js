@@ -9,15 +9,19 @@ module.exports = {
 }
 
 async function create(req, res) {
+    console.log(req.body.location)
     try{
         let newSpot = await Spotted.create({
             animalType: req.body.animalType,
-            coordinates: coordinates,
+            location: {
+                type: "Point",
+                coordinates: req.body.location},
             description: req.body.description,
             user: req.user._id
         })
         using = await User.findById(req.user._id)
         using.spots.push(newSpot)
+        using.save()
     } catch {
         console.log('backend fail')
     }

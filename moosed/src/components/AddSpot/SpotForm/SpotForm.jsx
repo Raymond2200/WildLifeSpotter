@@ -33,14 +33,13 @@ let SpotForm = forwardRef((props, ref) => {
     // submit new spot secure
     let handleSubmit = async (evt) => {
         let jwt = localStorage.getItem('token')
-        console.log(category)
         try {
             const fetchResponse = await fetch('/api/spotteds/new', {
                 method: 'POST',
                 headers: {"Content-Type": "application/json",'Authorization': 'Bearer ' + jwt},
                 body: JSON.stringify({
                     animalType: category, 
-                    coordinates:["45.910391","-77.835451"],
+                    location:[-77.835451, 45.910391],
                     description: comment
                 })
             })
