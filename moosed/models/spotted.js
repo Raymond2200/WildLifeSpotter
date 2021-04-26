@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
+const GeoJSON = require('mongoose-geojson-schema');
 const Schema = mongoose.Schema;
 
 const spottedSchema = new Schema({
     animalType: String,
-    lat: Number,
-    lng: Number,
+    location: mongoose.Schema.Types.Point,
     description: String,
     user: {
         type: Schema.Types.ObjectId,

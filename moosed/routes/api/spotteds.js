@@ -2,13 +2,17 @@ const express = require('express');
 const router = express.Router();
 const spottedCtrl = require('../../controllers/spotteds');
 
-
-router.use(require('../../config/auth'));
-router.post('/new', spottedCtrl.create);
-
 //filter routes
 router.get('/archived', spottedCtrl.archivedSpots)
-router.get('/myspots', spottedCtrl.mySpots)
 router.get('/recentspots', spottedCtrl.recentSpots)
+
+//Require Authentication
+router.use(require('../../config/auth'));
+
+//filter route
+router.get('/myspots', spottedCtrl.mySpots)
+
+//New spot route
+router.post('/new', spottedCtrl.create);
 
 module.exports = router;

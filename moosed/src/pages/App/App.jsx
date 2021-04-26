@@ -4,10 +4,11 @@ import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { getCurrentLatLng} from '../../services/geolocation'
 import AuthPage from '../../pages/AuthPage/AuthPage';
-import MenuList from '../../components/MenuList/MenuList'
-import ToggleView from '../../components/ToggleView/ToggleView'
-import FilterSpotteds from '../../components/FilterSpotteds/FilterSpotteds'
-import AddSpot from '../../components/AddSpot/AddSpot'
+import MenuList from '../../components/MenuList/MenuList';
+import ToggleView from '../../components/ToggleView/ToggleView';
+import FilterSpotteds from '../../components/FilterSpotteds/FilterSpotteds';
+import AddSpot from '../../components/AddSpot/AddSpot';
+import ListPage from '../ListPage/ListPage';
 
 
 class App extends Component {
@@ -42,7 +43,6 @@ class App extends Component {
         }
     }
     render() {
-        
         return (
         <div className="App">
             <h2>Moose on the Loose</h2>
