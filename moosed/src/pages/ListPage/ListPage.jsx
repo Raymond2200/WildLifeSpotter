@@ -26,6 +26,4 @@ function ListView(props) {
     )
 }
 
-
-
 export default ListView;
