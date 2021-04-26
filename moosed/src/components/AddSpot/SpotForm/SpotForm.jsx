@@ -7,7 +7,6 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import './SpotForm.css';
-import ReactDom from "react-dom";
  
 let SpotForm = forwardRef((props, ref) => {
     
@@ -22,7 +21,8 @@ let SpotForm = forwardRef((props, ref) => {
     let handleCategory = (e) => {
         setCategory(e.target.value)
     }
-
+    
+    // forward ref that allows addspot button to activate function
     useImperativeHandle(ref, () => {
         return {
             openSpotForm: () => open(),
@@ -30,7 +30,7 @@ let SpotForm = forwardRef((props, ref) => {
         }
     })
 
-    
+    // submit new spot secure
     let handleSubmit = async (evt) => {
         let jwt = localStorage.getItem('token')
         console.log(category)
@@ -40,8 +40,7 @@ let SpotForm = forwardRef((props, ref) => {
                 headers: {"Content-Type": "application/json",'Authorization': 'Bearer ' + jwt},
                 body: JSON.stringify({
                     animalType: category, 
-                    lat: "45.910391",
-                    lng: "-77.835451",
+                    coordinates:["45.910391","-77.835451"],
                     description: comment
                 })
             })
@@ -58,6 +57,7 @@ let SpotForm = forwardRef((props, ref) => {
     let close = () => {
         setDisplay(false)
     }
+
     if (display) {
         return(
                 <div className={"modal-wrapper"}>
