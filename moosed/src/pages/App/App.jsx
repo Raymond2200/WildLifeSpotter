@@ -62,6 +62,12 @@ class App extends Component {
                 <br/>
                 </>
             )}/>
+            <Route path='/list' render={(props) => (
+                <>
+                <ListPage />
+                <br/>
+                </>
+            )}/>
             <Route path='/logout' render={this.handleLogout}/>
             <Route path='/' render={(props) => (
                 <>

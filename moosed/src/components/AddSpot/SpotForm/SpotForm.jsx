@@ -39,13 +39,14 @@ let SpotForm = forwardRef((props, ref) => {
                 headers: {"Content-Type": "application/json",'Authorization': 'Bearer ' + jwt},
                 body: JSON.stringify({
                     animalType: category, 
-                    location:[-77.835451, 45.910391],
+                    location:[-77.835250, 45.910190],
                     description: comment
                 })
             })
+        if (!fetchResponse.ok) throw new Error('Fetch failed - Bad request')
+
         } catch (err) {
-            console.log("error", err)
-            this.setState({ error: 'Failed - Try Again' });
+            console.log("error", err);
         }
     }
 

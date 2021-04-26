@@ -1,24 +1,11 @@
-import {useState, useEffect} from 'react';
+import ListSpots from '../../components/ListSpots/ListSpots'
 
 function ListPage() {
 
-    let [spots, setSpots] = useState()
-
-    useEffect(() => {
-
-    })
-    
-    let recentSpots = async () => {
-        
-        await fetch("/api/spotteds/recentspots")
-            .then((res) => res.json())
-            .then(data => console.log(data))
-    }
-    
 
     return (
         <div>
-            TEST
+            <ListSpots />
         </div>
     )
 }
