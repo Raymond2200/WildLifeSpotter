@@ -16,6 +16,7 @@ class App extends Component {
         lat: null,
         lng: null,
         user:null,
+        doRedirect: false,
         spotteds: [
             {animalType: 'Moose', lat: 43.239818899999996, lng: -79.8139712, description: "there's a damn moose on the loose!"},
             {animalType: 'Skunk', lat: 43.249818899999996, lng: -79.8239712, description: "i think i smell a skunk"},
@@ -23,7 +24,12 @@ class App extends Component {
             {animalType: 'Deer', lat: 43.269818899999996, lng: -79.8439712, description: "oh look, bambi!"},
         ],
     }
-
+    handleLogout = () => {
+        console.log("logout hit")
+        localStorage.clear();
+        this.setState({user: null})
+        window.location.href = '/';
+    }
     setUserInState = (incomingUserData) => {
         this.setState({ user: incomingUserData})
     }
@@ -51,7 +57,9 @@ class App extends Component {
         <div className="App">
             <h2>Moose on the Loose</h2>
             {/* <img src="logo.svg"></img> */}
-            <MenuList/>
+            <MenuList 
+                userState={this.state.user}
+                handleLogout={this.handleLogout}/>
             <Switch>
             <Route path='/login-signup' render={(props) => (
                 <>
@@ -59,6 +67,7 @@ class App extends Component {
                 <br/>
                 </>
             )}/>
+            <Route path='/logout' render={this.handleLogout}/>
             <Route path='/' render={(props) => (
                 <>
                 <Map

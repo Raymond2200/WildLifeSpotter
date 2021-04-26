@@ -7,6 +7,7 @@ import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import { PromiseProvider } from 'mongoose';
 
 //creates the css styles to be applied to menu on toggle
 const useStyles = makeStyles({
@@ -15,7 +16,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function MenuList() {
+export default function MenuList(props) {
     const classes = useStyles();
     const [state, setState] = React.useState({
         left:false,
@@ -37,32 +38,33 @@ export default function MenuList() {
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
         >
-        <List>
-            <ListItem 
-                button key="Profile" 
-                component={Link}
-                to="/profile"
-            >
-                <ListItemText primary="Profile"/>
-            </ListItem>
-        </List>
-        <Divider />
-        <List>
-            <ListItem 
-                button key="Login-Signup"
-                component={Link}
-                to="/login-signup"    
-            >
-                <ListItemText primary="Login/Signup" />
-            </ListItem>
-            <ListItem 
-                button key="Logout"
-                component={Link}
-                to="/logout"
-            >
-                <ListItemText primary="Logout" />
-            </ListItem>
-        </List>
+        {props.userState ? (
+            <div>
+            <List>
+                <ListItem button key="Profile">
+                    <ListItemText primary={props.userState.username}/>
+                </ListItem>
+                <Divider />
+                <ListItem 
+                    button key="Logout"
+                    component={Link}
+                    to="/logout">
+                        <ListItemText primary="Logout" />
+                </ListItem>
+            </List>
+            </div>
+        ) : (
+            <List>
+                <ListItem 
+                    button key="Login-Signup"
+                    component={Link}
+                    to="/login-signup">
+                        <ListItemText primary="Login-Signup" />
+                </ListItem>
+            </List>
+        )
+         }
+        
     </div>
     );
 
