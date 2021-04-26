@@ -34,22 +34,20 @@ class App extends Component {
         this.setState({ user: incomingUserData})
     }
     async componentDidMount () {
-        //google maps
         const {lat, lng } = await getCurrentLatLng()
-        if ({lat, lng}) {
-            this.setState({
-                lat: lat, 
-                lng: lng
-            }) 
-        }
-        //auth
         let token = localStorage.getItem('token')
-        //setState for both
         if (token) {
             let userDoc = JSON.parse(atob(token.split('.')[1])).user
             this.setState({
                 user: userDoc,
+                lat: lat, 
+                lng: lng
             })      
+        } else {
+            this.setState({
+                lat: lat, 
+                lng: lng
+            }) 
         }
     }
     render() {
