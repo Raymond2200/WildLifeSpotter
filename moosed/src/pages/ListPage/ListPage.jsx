@@ -4,14 +4,19 @@ import { ListItemText } from '@material-ui/core';
 
 function ListView(props) {
     let [spots, setSpots] = useState()
-    useEffect(() => {
-    })
     
-    let recentSpots = async () => {
-        await fetch("/api/spotteds/recentspots")
-            .then((res) => res.json())
-            .then(data => console.log(data))
-    }
+    useEffect(async () => {
+        console.log("I loaded")
+        try{
+            let fetchSpotsResponse = await fetch('/api/spotteds/me/-77.835251/45.910191')
+            let inSpots = await fetchSpotsResponse.json()
+            console.log(inSpots)
+            setSpots(inSpots)
+            console.log("test")
+        } catch (err) {
+            console.log('ERROR')
+        }
+    },[])
 
     return (
         <div>
