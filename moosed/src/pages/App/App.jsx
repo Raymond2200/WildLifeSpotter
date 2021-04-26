@@ -23,16 +23,18 @@ class App extends Component {
             {animalType: 'Deer', lat: 43.269818899999996, lng: -79.8439712, description: "oh look, bambi!"},
         ],
     }
-
+    handleLogout = () => {
+        console.log("logout hit")
+        localStorage.clear();
+        this.setState({user: null})
+        return <Redirect to="/"/>
+    }
     setUserInState = (incomingUserData) => {
         this.setState({ user: incomingUserData})
     }
     async componentDidMount () {
-        //google maps
         const {lat, lng } = await getCurrentLatLng()
-        //auth
         let token = localStorage.getItem('token')
-        //setState for both
         if (token) {
             let userDoc = JSON.parse(atob(token.split('.')[1])).user
             this.setState({
@@ -40,13 +42,19 @@ class App extends Component {
                 lat: lat, 
                 lng: lng
             })      
+        } else {
+            this.setState({
+                lat: lat, 
+                lng: lng
+            }) 
         }
     }
     render() {
         return (
         <div className="App">
             <h2>Moose on the Loose</h2>
-            <MenuList/>
+            {/* <img src="logo.svg"></img> */}
+            <MenuList userState={this.state.user}/>
             <Switch>
             <Route path='/login-signup' render={(props) => (
                 <>
@@ -60,6 +68,7 @@ class App extends Component {
                 <br/>
                 </>
             )}/>
+            <Route path='/logout' render={this.handleLogout}/>
             <Route path='/' render={(props) => (
                 <>
                 <Map
