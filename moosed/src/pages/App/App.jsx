@@ -73,6 +73,9 @@ class App extends Component {
             )}/>
             <Redirect to="/" />
         </Switch>  
+                <AddSpot user={this.state.user}/>
+            </div>
+
         </div>
         );
     }
