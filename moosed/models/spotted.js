@@ -4,7 +4,10 @@ const Schema = mongoose.Schema;
 
 const spottedSchema = new Schema({
     animalType: String,
-    location: mongoose.Schema.Types.Point,
+    location: {type: 
+        { type: String},
+        coordinates:[]
+    },
     description: String,
     user: {
         type: Schema.Types.ObjectId,
@@ -14,4 +17,6 @@ const spottedSchema = new Schema({
     timestamps: true
 });
 
+
+spottedSchema.index({ location: "2dsphere" });
 module.exports = mongoose.model('Spotted', spottedSchema);
