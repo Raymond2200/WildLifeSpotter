@@ -33,6 +33,8 @@ let SpotForm = forwardRef((props, ref) => {
     // submit new spot secure
     let handleSubmit = async (evt) => {
         let jwt = localStorage.getItem('token')
+        let lat = props.lat
+        let lng = props.lng
         try {
             const fetchResponse = await fetch('/api/spotteds/new', {
                 method: 'POST',
@@ -43,8 +45,10 @@ let SpotForm = forwardRef((props, ref) => {
                     description: comment
                 })
             })
-        if (!fetchResponse.ok) throw new Error('Fetch failed - Bad request')
-
+            if (!fetchResponse.ok) throw new Error('Fetch failed - Bad request')
+            let fetchSpotsResponse = await fetch('/api/spotteds/me/'+lng+'/'+lat)
+            let inSpots = await fetchSpotsResponse.json()
+            props.setSpotteds(inSpots)
         } catch (err) {
             console.log("error", err);
         }
@@ -76,7 +80,7 @@ let SpotForm = forwardRef((props, ref) => {
                                 <MenuItem value={"Moose"}>Moose</MenuItem>
                                 <MenuItem value={"Bear"}>Bear</MenuItem>
                                 <MenuItem value={"Deer"}>Deer</MenuItem>
-                                <MenuItem value={"Mountain cat"}>Mountain Cat</MenuItem>
+                                <MenuItem value={"Cougar"}>Mountain Cat</MenuItem>
                                 <MenuItem value={"Wolf"}>Wolf/Coyote</MenuItem>
                                 <MenuItem value={"Skunk"}>Skunk</MenuItem>
                             </Select>
