@@ -40,10 +40,10 @@ async function nearMeSpots(req, res) {
                     $minDistance: 0
                     }
                 }
-            }, {
-            "timestamp":
-                {$gte: [new Date,(Date.now - 1000 * 60 * 60)]}
             }
+            // , {"timestamp":
+            //     {$gte: [new Date,(Date.now - 1000 * 60 * 60)]}
+            // }
         )
         res.json(spots)
     } catch(err) {
@@ -66,6 +66,7 @@ async function archivedSpots(req, res) {
                 }
             }
         )
+        console.log("hello")
         res.json(spots)
     } catch(err) {
         console.log(err)

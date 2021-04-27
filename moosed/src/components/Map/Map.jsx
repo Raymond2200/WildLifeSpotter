@@ -47,7 +47,7 @@ class Map extends Component {
                     maxWidth: 200,
                 });
                 let svgMarker;
-                console.log('animalType: ', spot[0])
+
                 if (spot[0] === 'Moose') {
                     svgMarker = {
                         url: "icons/moose.svg",
