@@ -24,4 +24,4 @@ function ListSpots() {
     )
 }
 
-export default ListSpots
+export default ListSpots;
