@@ -87,14 +87,16 @@ class App extends Component {
                             {...props}
                             lng={this.state.lng}
                             lat={this.state.lat}
-                            spotteds={this.state.spotteds}/>
+                            spotteds={this.state.spotteds}
                             handleDragMarker={this.handleDragMarker}
+                        />
                     ) : ( 
                         <ListPage
                             {...props}
                             lng={this.state.lng}
                             lat={this.state.lat}
-                            spotteds={this.state.spotteds}/>
+                            spotteds={this.state.spotteds}
+                        />
                     )}
                     <div className="button-container">
                         <ToggleView setListView={(listview) => this.setState({listview})}/>
