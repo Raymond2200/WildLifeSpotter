@@ -13,7 +13,7 @@ function AddSpot(props) {
     return (
         <div>
             <Button onClick={openModal} variant="contained">Add Spot</Button>
-            <SpotForm ref={spotRef} lng={props.lng} lat={props.lat}/>
+            <SpotForm ref={spotRef} lng={props.lng} lat={props.lat} setSpotteds={props.setSpotteds}/>
         </div>
     )
 }
