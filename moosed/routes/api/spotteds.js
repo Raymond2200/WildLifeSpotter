@@ -3,7 +3,7 @@ const router = express.Router();
 const spottedCtrl = require('../../controllers/spotteds');
 
 //filter routes
-router.get('/archived', spottedCtrl.archivedSpots);
+router.get('/archived/:lng/:lat', spottedCtrl.archivedSpots);
 router.get('/recentspots', spottedCtrl.nearMeSpots);
 
 //Require Authentication

@@ -28,7 +28,6 @@ async function create(req, res) {
 }
 
 async function nearMeSpots(req, res) {
-    console.log(req.params.lng)
     try{
         let spots = await Spotted.find(
             {
@@ -46,6 +45,7 @@ async function nearMeSpots(req, res) {
             //     {$gte: [new Date,(Date.now - 1 * 60 * 60 * 1000)]}
             // }
         )
+        console.log(spots)
         res.json(spots)
     } catch(err) {
         console.log(err)
@@ -67,7 +67,6 @@ async function archivedSpots(req, res) {
                 }
             }
         )
-        console.log("hello")
         res.json(spots)
     } catch(err) {
         console.log(err)
