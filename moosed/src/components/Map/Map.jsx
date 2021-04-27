@@ -4,9 +4,6 @@ import styles from './Map.module.css';
 
 class Map extends Component {
     mapDiv = React.createRef();
-    // handleDrag = (lat, lng) => {
-    //     this.props.handleDragMarker(lat, lng)
-    // }
     setMap() {
         let savedVals = [];
         let spotteds = this.props.spotteds;
@@ -111,11 +108,25 @@ class Map extends Component {
             });
         }
     }
+    recenterMap() {
+        const map = this.map;
+        let curr = {
+            lat: this.props.lat, 
+            lng: this.props.lng}
+    
+        const google = this.props.google;
+        const maps = window.google.maps;
+    
+        if (map) {
+            let center = new maps.LatLng(curr.lat, curr.lng)
+            map.panTo(center)
+        }
+    }
     componentDidMount() {
         this.setMap()
     }
     componentDidUpdate() {
-        this.setMap();
+        this.recenterMap();
     }
     render () {
         return (
