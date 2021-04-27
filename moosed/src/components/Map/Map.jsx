@@ -29,11 +29,30 @@ class Map extends Component {
                     gestureHandling: "greedy"
                 }
             );
+            const initString = 
+                `<div class="pin">` +
+                `<h1 id="hello">Hi There!</h1>` +
+                `<div id="helper">Drag me to a location and then click "ADD SPOT"</div>` +
+                `</div>`;
+            const initwindow = new window.google.maps.InfoWindow({
+                content: initString,
+                maxWidth: 200,
+            });
+            const initMarker = {
+                url: "icons/binoculars.svg",
+                anchor: new window.google.maps.Point(25,50),
+                scaledSize: new window.google.maps.Size(60,60)
+            }
             let dragMarker = new window.google.maps.Marker({
                 position: location, 
                 map: map,
                 draggable: true,
-                animation: window.google.maps.Animation.DROP
+                animation: window.google.maps.Animation.DROP,
+                icon: initMarker,
+            });
+            dragMarker.addListener("animation_changed", () => {
+                initwindow.open(map, dragMarker);
+
             });
             window.google.maps.event.addListener(dragMarker, 'dragend', (evt) => {
                 let dragLat = dragMarker.getPosition().lat();
@@ -53,7 +72,6 @@ class Map extends Component {
                     maxWidth: 200,
                 });
                 let svgMarker;
-
                 if (spot[0] === 'Moose') {
                     svgMarker = {
                         url: "icons/moose.svg",

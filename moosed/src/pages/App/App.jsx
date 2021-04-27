@@ -12,8 +12,8 @@ import AddSpot from '../../components/AddSpot/AddSpot';
 
 class App extends Component {
     state = {
-        lat: 45.910191,
-        lng: -77.822451,
+        lat: null,
+        lng: null,
         user:null,
         listview: false,
         spotteds: [
@@ -60,8 +60,9 @@ class App extends Component {
     render() {
         return (
         <div className="App">
-            <h2>Moose on the Loose</h2>
-            {/* <img src="logo.svg"></img> */}
+            {/* <h2>Moose on the Loose</h2> */}
+            {/* <img src="Logo.svg"></img> */}
+            <img src="Logo2.svg"></img>
             <MenuList userState={this.state.user}/>
             <Switch>
             {/* <Route path='/list' render={(props) => (
