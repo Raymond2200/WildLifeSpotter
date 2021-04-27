@@ -93,8 +93,10 @@ class App extends Component {
                             {...props}
                             lng={this.state.lng}
                             lat={this.state.lat}
-                            spotteds={this.state.spotteds}/>
+                            spotteds={this.state.spotteds}
+                        />
                     )}
+                    <footer>
                     <div className="button-container">
                         <ToggleView setListView={(listview) => this.setState({listview})}/>
                         <FilterSpotteds 
@@ -106,6 +108,7 @@ class App extends Component {
                             lng={this.state.lng}
                             lat={this.state.lat} />
                     </div>
+                    </footer>
                 </>
             )}/>
             <Redirect to="/" />
