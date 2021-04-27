@@ -20,9 +20,17 @@ footer {
   height: 10%;
   bottom: 0;
 }
-.Button {
-  color: black;
+/* #login-req #login-req-text {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
 }
-.Button:disabled { /* Increase the specificity */
-  color: white;
-}
+#login-req:hover #login-req-text {
+  visibility: visible;
+} */

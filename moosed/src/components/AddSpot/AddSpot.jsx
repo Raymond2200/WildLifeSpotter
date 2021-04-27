@@ -1,14 +1,29 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import SpotForm from './SpotForm/SpotForm'
+import Tooltip from '@material-ui/core/Tooltip';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+
 
 function AddSpot(props) {
     let spotRef = useRef();
+    const [open, setOpen] = useState(false);
 
 
     let openModal = () => {
         spotRef.current.openSpotForm()
     }
+    const handleTooltipClose = () => {
+        setOpen(false);
+      };
+    
+    const handleTooltipOpen = () => {
+    setOpen(true);
+    };
+
+    const handleClickAway = () => {
+    setOpen(false);
+    };
 
     return (
         <div>
@@ -20,14 +35,31 @@ function AddSpot(props) {
                     Add Spot
                 </Button>
             ): (
-                <Button 
-                    onClick={openModal} 
-                    variant="contained"
-                    disabled
-                    className="Button"
-                >
-                    Add Spot
-                </Button>
+                <ClickAwayListener onClickAway={handleClickAway}>
+                    <Tooltip 
+                    PopperProps={{
+                            disablePortal: true,
+                        }}
+                        onClose={handleTooltipClose}
+                        open={open}
+                        disableFocusListener
+                        disableHoverListener
+                        disableTouchListener
+                        
+                        title="Please login!" 
+                        arrow
+                    >
+                    <div leaveDelay="25" onClick={handleTooltipOpen}>    
+                        <Button 
+                            disabled
+                            onClick={openModal} 
+                            variant="contained"
+                        >
+                            Add Spot
+                        </Button>
+                    </div>
+                    </Tooltip>
+                </ClickAwayListener>
             )}
             <SpotForm ref={spotRef} lng={props.lng} lat={props.lat} setSpotteds={props.setSpotteds}/>
         </div>
