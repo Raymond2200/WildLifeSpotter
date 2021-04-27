@@ -12,8 +12,8 @@ import AddSpot from '../../components/AddSpot/AddSpot';
 
 class App extends Component {
     state = {
-        lat: null,
-        lng: null,
+        lat: 45.910191,
+        lng: -77.822451,
         user:null,
         listview: false,
         spotteds: [
@@ -69,7 +69,9 @@ class App extends Component {
             )}/>
             <Route path='/list' render={(props) => (
                 <>
-                <ListPage />
+                <ListPage 
+                    lng={this.state.lng}
+                    lat={this.state.lat} />
                 <br/>
                 </>
             )}/>
@@ -94,7 +96,9 @@ class App extends Component {
                         <FilterSpotteds 
                             setSpotteds={(spotteds) => this.setState({spotteds})}
                         />
-                        <AddSpot user={this.state.user} />
+                        <AddSpot 
+                            lng={this.state.lng}
+                            lat={this.state.lat} />
                     </div>
                 </>
             )}/>

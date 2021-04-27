@@ -28,6 +28,7 @@ async function create(req, res) {
 }
 
 async function nearMeSpots(req, res) {
+    console.log(req.params.lng)
     try{
         let spots = await Spotted.find(
             {
@@ -40,10 +41,10 @@ async function nearMeSpots(req, res) {
                     $minDistance: 0
                     }
                 }
-            }, {
-            "timestamp":
-                {$gte: [new Date,(Date.now - 1000 * 60 * 60)]}
             }
+            // ,{createdAt:
+            //     {$gte: [new Date,(Date.now - 1 * 60 * 60 * 1000)]}
+            // }
         )
         res.json(spots)
     } catch(err) {
@@ -74,10 +75,9 @@ async function archivedSpots(req, res) {
 }
 
 
-function mySpots (req, res) {
-    console.log("my spots hit")
-    Spotted.find({}, function(err, posts) {
-        res.json(posts)
+async function mySpots (req, res) {
+    await User.findById(req.user._id).sort('-createdAt').populate('spots').exec((err, spots) =>  {
+        res.json({user: req.user, spots: spots})
     })
 }
 
