@@ -53,7 +53,16 @@ function FilterSpotteds(props) {
                 onClose={handleClose}
             >
                 <MenuItem onClick={archivedSpots}>Archived Sightings</MenuItem>
-                <MenuItem onClick={mySpots}>My Sightings</MenuItem>
+                {props.user ? (
+                    <MenuItem onClick={mySpots}>My Sightings</MenuItem>
+                ) : (
+                    <MenuItem 
+                        onClick={mySpots}
+                        disabled 
+                        >
+                            My Sightings
+                    </MenuItem>
+                )}
                 <MenuItem onClick={recentSpots}>Recent Sightings</MenuItem>
             </Menu>
         </div>

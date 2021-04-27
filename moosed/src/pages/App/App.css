@@ -20,3 +20,9 @@ footer {
   height: 10%;
   bottom: 0;
 }
+.Button {
+  color: black;
+}
+.Button:disabled { /* Increase the specificity */
+  color: white;
+}
