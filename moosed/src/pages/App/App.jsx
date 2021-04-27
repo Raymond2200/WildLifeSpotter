@@ -12,8 +12,8 @@ import AddSpot from '../../components/AddSpot/AddSpot';
 
 class App extends Component {
     state = {
-        lat: 45.910191,
-        lng: -77.822451,
+        lat: null,
+        lng: null,
         user:null,
         listview: false,
         spotteds: [
@@ -25,6 +25,7 @@ class App extends Component {
             {animalType: 'Cougar', lat: 43.289818899999996, lng: -79.8639712, description: "meow"},
         ],
     }
+
     handleDragMarker = (lat, lng) => {
         this.setState({
             lat: lat, 
@@ -43,19 +44,24 @@ class App extends Component {
     async componentDidMount () {
         const {lat, lng} = await getCurrentLatLng()
         let token = localStorage.getItem('token')
+        let fetchSpotsResponse = await fetch('/api/spotteds/me/'+lng+'/'+lat)
+            let inSpots = await fetchSpotsResponse.json()
         if (token) {
             let userDoc = JSON.parse(atob(token.split('.')[1])).user
             this.setState({
                 user: userDoc,
                 lat: lat, 
-                lng: lng
+                lng: lng,
+                spotteds: inSpots
             })      
         } else {
             this.setState({
                 lat: lat, 
-                lng: lng
+                lng: lng,
+                spotteds: inSpots,
             }) 
         }
+        console.log(this.state.spotteds)
     }
     render() {
         return (
@@ -64,20 +70,9 @@ class App extends Component {
             {/* <img src="logo.svg"></img> */}
             <MenuList userState={this.state.user}/>
             <Switch>
-            {/* <Route path='/list' render={(props) => (
-               <ListPage/> 
-            )}/> */}
             <Route path='/login-signup' render={(props) => (
                 <>
                 <AuthPage {...props} user={this.state.user} setUserInState={this.setUserInState}/>
-                <br/>
-                </>
-            )}/>
-            <Route path='/list' render={(props) => (
-                <>
-                <ListPage 
-                    lng={this.state.lng}
-                    lat={this.state.lat} />
                 <br/>
                 </>
             )}/>
@@ -103,6 +98,8 @@ class App extends Component {
                         <ToggleView setListView={(listview) => this.setState({listview})}/>
                         <FilterSpotteds 
                             setSpotteds={(spotteds) => this.setState({spotteds})}
+                            lng={this.state.lng}
+                            lat={this.state.lat}
                         />
                         <AddSpot 
                             lng={this.state.lng}

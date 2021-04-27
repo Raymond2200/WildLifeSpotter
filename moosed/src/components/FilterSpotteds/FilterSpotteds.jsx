@@ -3,8 +3,10 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-function FilterSpotteds() {
+function FilterSpotteds(props) {
     const [anchorEl, setAnchorEl] = React.useState(null)
+    const [lng] = React.useState(props.lng)
+    const [lat] = React.useState(props.lat)
 
     const handleClick = (evnt) => {
         setAnchorEl(evnt.currentTarget)
@@ -14,7 +16,7 @@ function FilterSpotteds() {
     }
     const archivedSpots = async () => {
         handleClose()
-        await fetch("/api/spotteds/archived")
+        await fetch('/api/spotteds/archived/'+lng+'/'+lat)
             .then((res) => res.json())
             .then(data => console.log(data))
     }
@@ -26,7 +28,7 @@ function FilterSpotteds() {
     }
     const recentSpots = async () => {
         handleClose()
-        await fetch("/api/spotteds/me")
+        await fetch('/api/spotteds/me/'+lng+'/'+lat)
             .then((res) => res.json())
             .then(data => console.log(data))
     }
