@@ -12,8 +12,8 @@ import AddSpot from '../../components/AddSpot/AddSpot';
 
 class App extends Component {
     state = {
-        lat: 45.910191,
-        lng: -77.822451,
+        lat: null,
+        lng: null,
         user:null,
         listview: false,
         spotteds: [
@@ -64,20 +64,9 @@ class App extends Component {
             {/* <img src="logo.svg"></img> */}
             <MenuList userState={this.state.user}/>
             <Switch>
-            {/* <Route path='/list' render={(props) => (
-               <ListPage/> 
-            )}/> */}
             <Route path='/login-signup' render={(props) => (
                 <>
                 <AuthPage {...props} user={this.state.user} setUserInState={this.setUserInState}/>
-                <br/>
-                </>
-            )}/>
-            <Route path='/list' render={(props) => (
-                <>
-                <ListPage 
-                    lng={this.state.lng}
-                    lat={this.state.lat} />
                 <br/>
                 </>
             )}/>
@@ -100,6 +89,7 @@ class App extends Component {
                             spotteds={this.state.spotteds}
                         />
                     )}
+                    <footer>
                     <div className="button-container">
                         <ToggleView setListView={(listview) => this.setState({listview})}/>
                         <FilterSpotteds 
@@ -109,6 +99,7 @@ class App extends Component {
                             lng={this.state.lng}
                             lat={this.state.lat} />
                     </div>
+                    </footer>
                 </>
             )}/>
             <Redirect to="/" />
