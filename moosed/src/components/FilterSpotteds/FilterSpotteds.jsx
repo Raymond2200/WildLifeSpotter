@@ -26,7 +26,7 @@ function FilterSpotteds() {
     }
     const recentSpots = async () => {
         handleClose()
-        await fetch("/api/spotteds/recentspots")
+        await fetch("/api/spotteds/me")
             .then((res) => res.json())
             .then(data => console.log(data))
     }

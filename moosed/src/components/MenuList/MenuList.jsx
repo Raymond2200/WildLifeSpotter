@@ -7,7 +7,6 @@ import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { PromiseProvider } from 'mongoose';
 
 //creates the css styles to be applied to menu on toggle
 const useStyles = makeStyles({

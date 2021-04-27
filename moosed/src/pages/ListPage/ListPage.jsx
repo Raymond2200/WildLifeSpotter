@@ -1,23 +1,20 @@
 import {useState, useEffect} from 'react';
-import List from '@material-ui/core/List';
-import { ListItemText } from '@material-ui/core';
+import { Divider } from '@material-ui/core';
+import './ListPage.css'
 
-function ListView(props) {
-    let [spots, setSpots] = useState()
-    let [lng, setLng] = useState(props.lng)
-    let [lat, setLat] = useState(props.lat)
-    
-    useEffect(async () => {
-        console.log(lng,lat)
-        try{
+function ListPage(props) {
+    const [spots, setSpots] = useState([])
+    const [lng] = useState(props.lng)
+    const [lat] = useState(props.lat)
+
+
+    useEffect(() => {
+        const fetchData = async () => {
             let fetchSpotsResponse = await fetch('/api/spotteds/me/'+lng+'/'+lat)
             let inSpots = await fetchSpotsResponse.json()
-            console.log(inSpots)
-            setSpots(inSpots)
-            console.log(spots)
-        } catch (err) {
-            console.log('ERROR')
+            setSpots(inSpots)   
         }
+        fetchData()
     },[])
 
     function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
@@ -39,17 +36,20 @@ function ListView(props) {
 
     return (
         <div>
-            <List>
-                {props.spotteds.map(spottedAnimal => (
-                    <ListItemText 
-                        primary={spottedAnimal.animalType} 
-                        secondary={spottedAnimal.description} />
-                ))}
-            </List>
+            {spots.map(spottedAnimal => (
+            <div> 
+                <ul>
+                    <li>{spottedAnimal.animalType}</li>
+                    <li>{`Seen at: ${spottedAnimal.createdAt}`}</li>
+                    <li>{`Comment: ${spottedAnimal.description}`}</li>
+                    <li>{`Username: ${spottedAnimal.user}`}</li>
+                </ul>  
+                <Divider/>
+            </div>
+            
+            ))}
         </div>
     )
 }
 
-
-
-export default ListView;
+export default ListPage;

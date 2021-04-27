@@ -67,6 +67,7 @@ async function archivedSpots(req, res) {
                 }
             }
         )
+        console.log("hello")
         res.json(spots)
     } catch(err) {
         console.log(err)
@@ -77,7 +78,7 @@ async function archivedSpots(req, res) {
 
 async function mySpots (req, res) {
     await User.findById(req.user._id).sort('-createdAt').populate('spots').exec((err, spots) =>  {
-        res.json({user: req.user, spots: spots})
+        res.json(spots)
     })
 }
 
