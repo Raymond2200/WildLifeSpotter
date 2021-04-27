@@ -1,36 +1,35 @@
 import {useState, useEffect} from 'react';
-import List from '@material-ui/core/List';
-import { ListItemText } from '@material-ui/core';
+import { Divider } from '@material-ui/core';
+import './ListPage.css'
 
-function ListView(props) {
-    let [spots, setSpots] = useState()
+function ListPage(props) {
+    const [spots, setSpots] = useState([])
     
-    useEffect(async () => {
-        console.log("I loaded")
-        try{
+    useEffect(() => {
+        const fetchData = async () => {
             let fetchSpotsResponse = await fetch('/api/spotteds/me/-77.835251/45.910191')
             let inSpots = await fetchSpotsResponse.json()
-            console.log(inSpots)
-            setSpots(inSpots)
-            console.log("test")
-        } catch (err) {
-            console.log('ERROR')
+            setSpots(inSpots)   
         }
+        fetchData()
     },[])
 
     return (
         <div>
-            <List>
-                {props.spotteds.map(spottedAnimal => (
-                    <ListItemText 
-                        primary={spottedAnimal.animalType} 
-                        secondary={spottedAnimal.description} />
-                ))}
-            </List>
+            {spots.map(spottedAnimal => (
+            <div> 
+                <ul>
+                    <li>{spottedAnimal.animalType}</li>
+                    <li>{`Seen at: ${spottedAnimal.createdAt}`}</li>
+                    <li>{`Comment: ${spottedAnimal.description}`}</li>
+                    <li>{`Username: ${spottedAnimal.user}`}</li>
+                </ul>  
+                <Divider/>
+            </div>
+            
+            ))}
         </div>
     )
 }
 
-
-
-export default ListView;
+export default ListPage;
