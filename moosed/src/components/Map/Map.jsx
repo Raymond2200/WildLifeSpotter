@@ -4,7 +4,6 @@ import styles from './Map.module.css';
 
 class Map extends Component {
     mapDiv = React.createRef();
-    
     setMap() {
         let savedVals = [];
         let spotteds = this.props.spotteds;
@@ -30,12 +29,19 @@ class Map extends Component {
                     gestureHandling: "greedy"
                 }
             );
-            // new window.google.maps.Marker({
-            //     position: location, 
-            //     map: map,
-            //     draggable: true,
-            //     animation: window.google.maps.Animation.DROP
-            // });
+            let dragMarker = new window.google.maps.Marker({
+                position: location, 
+                map: map,
+                draggable: true,
+                animation: window.google.maps.Animation.DROP
+            });
+            window.google.maps.event.addListener(dragMarker, 'dragend', (evt) => {
+                let dragLat = dragMarker.getPosition().lat();
+                let dragLng = dragMarker.getPosition().lng();
+                this.props.handleDragMarker(dragLat, dragLng);
+                console.log('lat: ', dragMarker.getPosition().lat())
+                console.log('lng: ', dragMarker.getPosition().lng())
+            });
             savedVals.forEach((spot) => {
                 const contentString =
                     `<div class="pin">` +
@@ -103,11 +109,25 @@ class Map extends Component {
             });
         }
     }
+    recenterMap() {
+        const map = this.map;
+        let curr = {
+            lat: this.props.lat, 
+            lng: this.props.lng}
+    
+        const google = this.props.google;
+        const maps = window.google.maps;
+    
+        if (map) {
+            let center = new maps.LatLng(curr.lat, curr.lng)
+            map.panTo(center)
+        }
+    }
     componentDidMount() {
         this.setMap()
     }
     componentDidUpdate() {
-        this.setMap();
+        this.recenterMap();
     }
     render () {
         return (
