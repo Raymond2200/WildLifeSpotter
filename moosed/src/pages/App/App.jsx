@@ -17,13 +17,19 @@ class App extends Component {
         lng: null,
         user:null,
         spotteds: [
-            {animalType: 'Moose', lat: 43.239818899999996, lng: -79.8139712, description: "there's a damn moose on the loose!"},
-            {animalType: 'Skunk', lat: 43.249818899999996, lng: -79.8239712, description: "i think i smell a skunk"},
+            {animalType: 'Moose', lat: 43.189818899999996, lng: -79.8139712, description: "there's a damn moose on the loose!"},
+            {animalType: 'Skunk', lat: 43.199818899999996, lng: -79.8239712, description: "i think i smell a skunk"},
             {animalType: 'Wolf', lat: 43.259818899999996, lng: -79.8339712, description: "ahhh it's a wolf! really super long test description to test max width settings okay cool"},
             {animalType: 'Deer', lat: 43.269818899999996, lng: -79.8439712, description: "oh look, bambi!"},
             {animalType: 'Bear', lat: 43.279818899999996, lng: -79.8539712, description: "it's winnie the pooh!"},
             {animalType: 'Cougar', lat: 43.289818899999996, lng: -79.8639712, description: "meow"},
         ],
+    }
+    handleDragMarker = (lat, lng) => {
+        this.setState({
+            lat: lat, 
+            lng: lng
+        })
     }
     handleLogout = () => {
         console.log("logout hit")
@@ -35,7 +41,7 @@ class App extends Component {
         this.setState({ user: incomingUserData})
     }
     async componentDidMount () {
-        const {lat, lng } = await getCurrentLatLng()
+        const {lat, lng} = await getCurrentLatLng()
         let token = localStorage.getItem('token')
         if (token) {
             let userDoc = JSON.parse(atob(token.split('.')[1])).user
@@ -78,6 +84,7 @@ class App extends Component {
                     lng={this.state.lng}
                     lat={this.state.lat}
                     spotteds={this.state.spotteds}
+                    handleDragMarker={this.handleDragMarker}
                 />
                 <div className="button-container">
                     <ToggleView/>
