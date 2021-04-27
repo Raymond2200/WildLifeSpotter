@@ -53,6 +53,7 @@ class Map extends Component {
                     maxWidth: 200,
                 });
                 let svgMarker;
+
                 if (spot[0] === 'Moose') {
                     svgMarker = {
                         url: "icons/moose.svg",

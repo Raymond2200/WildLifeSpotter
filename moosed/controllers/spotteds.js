@@ -5,7 +5,6 @@ module.exports = {
     create,
     archivedSpots,
     mySpots,
-    recentSpots,
     nearMeSpots,
 }
 
@@ -32,6 +31,32 @@ async function nearMeSpots(req, res) {
     try{
         let spots = await Spotted.find(
             {
+            location:
+                {$near:
+                    {$geometry: {
+                        type: "Point",
+                        coordinates: [req.params.lng, req.params.lat]},
+                    $maxDistance: 100000,
+                    $minDistance: 0
+                    }
+                }
+            }
+            // , {"timestamp":
+            //     {$gte: [new Date,(Date.now - 1000 * 60 * 60)]}
+            // }
+        )
+        res.json(spots)
+    } catch(err) {
+        console.log(err)
+        res.send("500 Internal Server Error")
+    }
+}
+
+
+async function archivedSpots(req, res) {
+    try{
+        let spots = await Spotted.find(
+            {
                 location:
                 {$near:
                     {$geometry: {type: "Point", coordinates: [req.params.lng, req.params.lat]},
@@ -41,8 +66,7 @@ async function nearMeSpots(req, res) {
                 }
             }
         )
-        console.log("step 2")
-        console.log(spots)
+        console.log("hello")
         res.json(spots)
     } catch(err) {
         console.log(err)
@@ -51,22 +75,8 @@ async function nearMeSpots(req, res) {
 }
 
 
-function archivedSpots(req, res) {
-    console.log("archived spots hit")
-    Spotted.find({}, function(err, posts) {
-        res.json(posts)
-    })
-}
-
 function mySpots (req, res) {
     console.log("my spots hit")
-    Spotted.find({}, function(err, posts) {
-        res.json(posts)
-    })
-}
-
-function recentSpots (req, res) {
-    console.log("recent spots hit")
     Spotted.find({}, function(err, posts) {
         res.json(posts)
     })

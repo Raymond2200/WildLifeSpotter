@@ -3,7 +3,7 @@ export default [
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#e6e4df"
+        "color": "#ebe3cd"
       }
     ]
   },
@@ -80,7 +80,7 @@ export default [
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#8cbd9a"
+        "color": "#dfd2ae"
       }
     ]
   },
@@ -125,7 +125,7 @@ export default [
     "elementType": "geometry.fill",
     "stylers": [
       {
-        "color": "#b6dbbe"
+        "color": "#a5b076"
       }
     ]
   },
@@ -183,7 +183,6 @@ export default [
       }
     ]
   },
-  
   {
     "featureType": "road",
     "stylers": [
@@ -197,7 +196,7 @@ export default [
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#d1d1d1"
+        "color": "#f5f1e6"
       }
     ]
   },
@@ -224,7 +223,7 @@ export default [
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#d1d1d1"
+        "color": "#fdfcf8"
       }
     ]
   },
@@ -251,7 +250,7 @@ export default [
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#707070"
+        "color": "#e98d58"
       }
     ]
   },
@@ -260,7 +259,7 @@ export default [
     "elementType": "geometry.stroke",
     "stylers": [
       {
-        "color": "#d1d1d1"
+        "color": "#db8555"
       }
     ]
   },
@@ -322,7 +321,7 @@ export default [
     "elementType": "geometry.fill",
     "stylers": [
       {
-        "color": "#49a0cc"
+        "color": "#b9d3c2"
       }
     ]
   },
@@ -331,7 +330,7 @@ export default [
     "elementType": "labels.text",
     "stylers": [
       {
-        "visibility": "on"
+        "visibility": "off"
       }
     ]
   },
