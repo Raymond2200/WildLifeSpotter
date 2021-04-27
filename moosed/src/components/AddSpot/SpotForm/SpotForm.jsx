@@ -39,7 +39,7 @@ let SpotForm = forwardRef((props, ref) => {
                 headers: {"Content-Type": "application/json",'Authorization': 'Bearer ' + jwt},
                 body: JSON.stringify({
                     animalType: category, 
-                    location:[-77.835250, 45.910190],
+                    location:[props.lng, props.lat],
                     description: comment
                 })
             })
@@ -73,12 +73,12 @@ let SpotForm = forwardRef((props, ref) => {
                                 value={category}
                                 onChange={handleCategory}
                             >
-                                <MenuItem value={"moose"}>Moose</MenuItem>
-                                <MenuItem value={"bear"}>Bear</MenuItem>
-                                <MenuItem value={"deer"}>Deer</MenuItem>
-                                <MenuItem value={"mountain cat"}>Mountain Cat</MenuItem>
-                                <MenuItem value={"wolf"}>Wolf/Coyote</MenuItem>
-                                <MenuItem value={"skunk"}>Skunk</MenuItem>
+                                <MenuItem value={"Moose"}>Moose</MenuItem>
+                                <MenuItem value={"Bear"}>Bear</MenuItem>
+                                <MenuItem value={"Deer"}>Deer</MenuItem>
+                                <MenuItem value={"Mountain cat"}>Mountain Cat</MenuItem>
+                                <MenuItem value={"Wolf"}>Wolf/Coyote</MenuItem>
+                                <MenuItem value={"Skunk"}>Skunk</MenuItem>
                             </Select>
                             <FormHelperText>Type of Animal</FormHelperText>
                         </FormControl>
