@@ -94,11 +94,13 @@ class App extends Component {
                         <ToggleView setListView={(listview) => this.setState({listview})}/>
                         <FilterSpotteds 
                             setSpotteds={(spotteds) => this.setState({spotteds})}
+                            user={this.state.user}
                             lng={this.state.lng}
                             lat={this.state.lat}
                         />
                         <AddSpot
                             setSpotteds={(spotteds) => this.setState({spotteds})}
+                            user={this.state.user}
                             lng={this.state.lng}
                             lat={this.state.lat}
                         />
