@@ -28,25 +28,23 @@ async function create(req, res) {
 }
 
 async function nearMeSpots(req, res) {
+    let time = new Date
+    time.setHours(8)
     try{
-        let spots = await Spotted.find(
-            {
+        await Spotted.find({ 
+            $and:[{
             location:
-                {$near:
-                    {$geometry: {
-                        type: "Point",
-                        coordinates: [req.params.lng, req.params.lat]},
+            {$near:
+                {$geometry: {
+                    type: "Point",
+                    coordinates: [req.params.lng, req.params.lat]},
                     $maxDistance: 100000,
                     $minDistance: 0
-                    }
                 }
-            }
-            // ,{createdAt:
-            //     {$gte: [new Date,(Date.now - 1 * 60 * 60 * 1000)]}
-            // }
-        )
-        console.log(spots)
-        res.json(spots)
+            }},{
+            updatedAt : {$gte: time}}] 
+        }).populate('user').exec((err, spotteds) =>  {res.json(spotteds)})
+        console.log(time)
     } catch(err) {
         console.log(err)
         res.send("500 Internal Server Error")
@@ -76,8 +74,8 @@ async function archivedSpots(req, res) {
 
 
 async function mySpots (req, res) {
-    await User.findById(req.user._id).sort('-createdAt').populate('spots').exec((err, spots) =>  {
-        res.json(spots)
+    await User.findById(req.user._id).sort('-createdAt').populate('spots').exec((err, user) =>  {
+        res.json({user:user.spots})
     })
 }
 
