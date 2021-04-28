@@ -1,4 +1,3 @@
-import shape from '@material-ui/core/styles/shape';
 import React, { Component } from 'react'
 import mapStyle from './map-style';
 import styles from './Map.module.css';
@@ -134,12 +133,11 @@ class Map extends Component {
             let marker = new window.google.maps.Marker({
                 position: spot[1], 
                 map: this.mapRef,
-                animation: window.google.maps.Animation.DROP,
+                // animation: window.google.maps.Animation.DROP,
                 animalType: spot[0],
                 description: spot[2],
                 icon: svgMarker,
                 shape: shape,
-                
             });
             marker.addListener("click", () => {
                 if( prev_infowindow ) {
