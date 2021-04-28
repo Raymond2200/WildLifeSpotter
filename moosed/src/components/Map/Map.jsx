@@ -1,3 +1,4 @@
+import shape from '@material-ui/core/styles/shape';
 import React, { Component } from 'react'
 import mapStyle from './map-style';
 import styles from './Map.module.css';
@@ -113,6 +114,10 @@ class Map extends Component {
                     scaledSize: new window.google.maps.Size(80,80)
                 }
             }
+            const shape = {
+                coords: [10, 10, 10, 65, 70, 65, 70, 10],
+                type: "poly",
+              };
             let marker = new window.google.maps.Marker({
                 position: spot[1], 
                 map: this.state.map,
@@ -120,6 +125,8 @@ class Map extends Component {
                 animalType: spot[0],
                 description: spot[2],
                 icon: svgMarker,
+                shape: shape,
+                
             });
             marker.addListener("click", () => {
                 if( prev_infowindow ) {
