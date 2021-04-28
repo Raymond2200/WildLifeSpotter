@@ -41,11 +41,9 @@ async function nearMeSpots(req, res) {
                     $maxDistance: 100000,
                     $minDistance: 0
                 }
-//         res.json(spots) ** does this need to be hear? was in older code, seems important
             }},{
             updatedAt : {$gte: time}}] 
         }).populate('user').exec((err, spotteds) =>  {res.json(spotteds)})
-        console.log(time)
     } catch(err) {
         console.log(err)
         res.send("500 Internal Server Error")
@@ -55,7 +53,7 @@ async function nearMeSpots(req, res) {
 
 async function archivedSpots(req, res) {
     try{
-        let spots = await Spotted.find(
+        await Spotted.find(
             {
                 location:
                 {$near:
@@ -65,8 +63,7 @@ async function archivedSpots(req, res) {
                     }
                 }
             }
-        )
-        res.json(spots)
+        ).populate('user').exec((err, spotteds) =>  {res.json(spotteds)})
     } catch(err) {
         console.log(err)
         res.send("500 Internal Server Error")
@@ -75,8 +72,11 @@ async function archivedSpots(req, res) {
 
 
 async function mySpots (req, res) {
-    await User.findById(req.user._id).sort('-createdAt').populate('spots').exec((err, user) =>  {
-        res.json({user:user.spots})
-    })
+    try{
+    await Spotted.find({user : req.user._id}).populate('user').exec((err, spotteds) =>  {res.json(spotteds)})
+    } catch(err) {
+        console.log(err)
+        res.send("500 Internal Server Error")
+    }
 }
 

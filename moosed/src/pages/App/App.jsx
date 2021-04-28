@@ -19,6 +19,7 @@ class App extends Component {
         listview: false,
         spotteds: [],
         isLoading: false,
+        filter: "recent",
     }
 
     handleDragMarker = (lat, lng) => {
@@ -36,25 +37,52 @@ class App extends Component {
     setUserInState = (incomingUserData) => {
         this.setState({ user: incomingUserData})
     }
+
+    loadSpots = async (lat=this.state.lat, lng=this.state.lng) => {
+        if (this.state.filter === "recent") {
+            try{
+                let fetchSpotsResponse = await fetch('/api/spotteds/me/'+lng+'/'+lat)
+                let inSpots = await fetchSpotsResponse.json()
+                this.setState({spotteds: inSpots})
+            } catch (err) {
+                console.log(err+"Bad Request")
+        }
+        } else if (this.state.filter === "my") {
+            try{
+                let jwt = localStorage.getItem('token')
+                let fetchSpotsResponse = await fetch('/api/spotteds/myspots', {headers: {'Authorization': 'Bearer ' + jwt}})
+                let inSpots = await fetchSpotsResponse.json()
+                this.setState({spotteds: inSpots})
+            } catch (err) {
+                console.log(err+"Bad Request")
+        }
+        } else if (this.state.filter === "archive") {
+            try {
+                let fetchSpotsResponse = await fetch('/api/spotteds/archived/'+lng+'/'+lat)
+                let inSpots = await fetchSpotsResponse.json()
+                this.setState({spotteds: inSpots})
+            } catch (err) {
+                console.log(err+"Bad Request")
+            }
+        }
+    }
+
     async componentDidMount () {
         const {lat, lng} = await getCurrentLatLng()
         let token = localStorage.getItem('token')
-        let fetchSpotsResponse = await fetch('/api/spotteds/me/'+lng+'/'+lat)
-        let inSpots = await fetchSpotsResponse.json()
+        this.loadSpots(lat,lng)
         if (token) {
             let userDoc = JSON.parse(atob(token.split('.')[1])).user
             this.setState({
                 user: userDoc,
                 lat: lat, 
                 lng: lng,
-                spotteds: inSpots,
                 isLoading: true,
             })      
         } else {
             this.setState({
                 lat: lat, 
                 lng: lng,
-                spotteds: inSpots,
                 isLoading: true,
             }) 
         }
@@ -99,22 +127,27 @@ class App extends Component {
                                     lng={this.state.lng}
                                     lat={this.state.lat}
                                     spotteds={this.state.spotteds}
+                                    loadSpots={this.loadSpots}
+                                    setSpotteds={(spotteds) => this.setState({spotteds})}
                                 />
                             )}
                             <footer>
                             <div className="button-container">
                                 <ToggleView setListView={(listview) => this.setState({listview})}/>
                                 <FilterSpotteds 
-                                    setSpotteds={(spotteds) => this.setState({spotteds})}
+                                    setFilter={(filter, x) => this.setState({filter},x)}
+                                    loadSpots={this.loadSpots}
                                     user={this.state.user}
                                     lng={this.state.lng}
                                     lat={this.state.lat}
                                 />
                                 <AddSpot
-                                    setSpotteds={(spotteds) => this.setState({spotteds})}
+                                    setFilter={(filter) => this.setState({filter})}
+                                    loadSpots={this.loadSpots}
                                     user={this.state.user}
                                     lng={this.state.lng}
                                     lat={this.state.lat}
+                                    fitler={this.state.filter}
                                 />
                             </div>
                             </footer>

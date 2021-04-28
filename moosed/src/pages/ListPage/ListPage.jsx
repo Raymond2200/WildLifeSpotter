@@ -2,19 +2,11 @@ import {useState, useEffect} from 'react';
 import './ListPage.css'
 
 function ListPage(props) {
-    const [spots, setSpots] = useState([])
     const [lng] = useState(props.lng)
     const [lat] = useState(props.lat)
 
     useEffect(() => {
-        const fetchData = async () => {
-            console.log("hello")
-            let fetchSpotsResponse = await fetch('/api/spotteds/me/'+lng+'/'+lat)
-            let inSpots = await fetchSpotsResponse.json()
-            console.log(inSpots)   
-            setSpots(inSpots)
-        }
-        fetchData()
+        props.loadSpots()
     },[])
     
     function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
@@ -80,7 +72,7 @@ function ListPage(props) {
         <div>
             <div id="list-container"> 
             <br/>
-            {spots.map(spottedAnimal => (
+            {props.spotteds.map(spottedAnimal => (
                 <div className="list-item-container">
                     {setIcon(spottedAnimal.animalType)}
                     <li className="list-head"><img alt="icon" className="list-head-image" src={markerIcon}/></li>

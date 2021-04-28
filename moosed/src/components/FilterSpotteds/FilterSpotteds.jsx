@@ -5,8 +5,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 function FilterSpotteds(props) {
     const [anchorEl, setAnchorEl] = React.useState(null)
-    const [lng] = React.useState(props.lng)
-    const [lat] = React.useState(props.lat)
 
     const handleClick = (evnt) => {
         setAnchorEl(evnt.currentTarget)
@@ -14,23 +12,9 @@ function FilterSpotteds(props) {
     const handleClose = () => {
         setAnchorEl(null)
     }
-    const archivedSpots = async () => {
+    const filter = async (filt) => {
         handleClose()
-        await fetch('/api/spotteds/archived/'+lng+'/'+lat)
-            .then((res) => res.json())
-            .then(data => console.log(data))
-    }
-    const mySpots = async () => {
-        handleClose()
-        await fetch("/api/spotteds/myspots")
-            .then((res) => res.json())
-            .then(data => console.log(data))
-    }
-    const recentSpots = async () => {
-        handleClose()
-        await fetch('/api/spotteds/me/'+lng+'/'+lat)
-            .then((res) => res.json())
-            .then(data => console.log(data))
+        props.setFilter(filt,props.loadSpots)
     }
 
     return (
@@ -52,18 +36,18 @@ function FilterSpotteds(props) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <MenuItem onClick={archivedSpots}>Archived Sightings</MenuItem>
+                <MenuItem onClick={() => {filter("archive")}} >Archived Sightings</MenuItem>
                 {props.user ? (
-                    <MenuItem onClick={mySpots}>My Sightings</MenuItem>
+                    <MenuItem onClick={() => {filter("my")}} >My Sightings</MenuItem>
                 ) : (
                     <MenuItem 
-                        onClick={mySpots}
-                        disabled 
+                    onClick={() => {filter("my")}}
+                        disabled
                         >
                             My Sightings
                     </MenuItem>
                 )}
-                <MenuItem onClick={recentSpots}>Recent Sightings</MenuItem>
+                <MenuItem onClick={() => {filter("recent")}}>Recent Sightings</MenuItem>
             </Menu>
         </div>
     )
