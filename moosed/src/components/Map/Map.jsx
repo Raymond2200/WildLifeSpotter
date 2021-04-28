@@ -4,15 +4,13 @@ import styles from './Map.module.css';
 
 class Map extends Component {
     mapDiv = React.createRef();
-    state = {
-        map: null,
-    }
+    mapRef = React.createRef();
     setMap = () => {
         if(this.props.lat && this.props.lng) {
             const location = {
                 lat: this.props.lat, 
                 lng: this.props.lng}
-            this.state.map = new window.google.maps.Map(
+            this.mapRef = new window.google.maps.Map(
                 this.mapDiv.current, {
                     zoom: this.props.zoom || 12,
                     center: location, 
@@ -37,13 +35,14 @@ class Map extends Component {
             }
             let dragMarker = new window.google.maps.Marker({
                 position: location, 
-                map: this.state.map,
+                map: this.mapRef,
                 draggable: true,
                 animation: window.google.maps.Animation.DROP,
                 icon: initMarker,
+                zIndex: 9999,
             });
             dragMarker.addListener("animation_changed", () => {
-                initwindow.open(this.state.map, dragMarker);
+                initwindow.open(this.mapRef, dragMarker);
             });
             window.google.maps.event.addListener(dragMarker, 'dragend', (evt) => {
                 let dragLat = dragMarker.getPosition().lat();
@@ -57,19 +56,33 @@ class Map extends Component {
         let savedVals = [];
         let spotteds = this.props.spotteds;
         let prev_infowindow = false;
+        function trimDate(dbItemDate) {
+            let newTime = [];
+            const months = [ "January", "February", "March", "April", "May", "June", 
+           "July", "August", "September", "October", "November", "December" ];
+            newTime = dbItemDate.split(/-|T|:/)
+            while(newTime[1][0] === '0') {
+                newTime[1] = newTime[1].substring(1)
+            }
+            let monthName = months[newTime[1] - 1]
+            newTime.splice(1, 1, monthName)
+        return `Spotted on ${newTime[1]} ${newTime[2]} at ${newTime[3]}:${newTime[4]}`
+        }
         spotteds.forEach((spot) => {
             let animalType = spot.animalType;
             let location = {
                 lat: spot.location.coordinates[1], 
                 lng: spot.location.coordinates[0]}
             let description = spot.description;
-            savedVals.push([animalType, location, description]);
+            let dateTime = trimDate(spot.updatedAt)
+            savedVals.push([animalType, location, description, dateTime]);
         });
         savedVals.forEach((spot) => {
             const contentString =
                 `<div class="pin">` +
                 `<h1 id="animalType">${spot[0]}</h1>` +
                 `<div id="description">${spot[2]}</div>` +
+                `<div id="dateTime">${spot[3]}</div>` +
                 `</div>`;
             const infowindow = new window.google.maps.InfoWindow({
                 content: contentString,
@@ -115,8 +128,8 @@ class Map extends Component {
             }
             let marker = new window.google.maps.Marker({
                 position: spot[1], 
-                map: this.state.map,
-                // animation: window.google.maps.Animation.DROP,
+                map: this.mapRef,
+                animation: window.google.maps.Animation.DROP,
                 animalType: spot[0],
                 description: spot[2],
                 icon: svgMarker,
@@ -131,15 +144,12 @@ class Map extends Component {
         });
     }
     recenterMap() {
-        const map = this.map;
-        console.log('recentermap', map)
+        const map = this.mapRef;
         let curr = {
             lat: this.props.lat, 
             lng: this.props.lng
         }
-        const google = this.props.google;
         const maps = window.google.maps;
-        console.log('maps', maps)
     
         if (map) {
             let center = new maps.LatLng(curr.lat, curr.lng)
@@ -148,10 +158,9 @@ class Map extends Component {
     }
     componentDidMount() {
         this.setMap()
-        
     }
     componentDidUpdate(prevProps) {
-        if (this.props.location !== prevProps.location) {
+        if (this.props.lat !== prevProps.lat) {
             this.recenterMap();
         } else if (this.props.spotteds !== prevProps.spotteds){
             this.drawMarkers();
