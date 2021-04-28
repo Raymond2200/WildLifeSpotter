@@ -49,7 +49,7 @@ function AddSpot(props) {
                         title="Please login!" 
                         arrow
                     >
-                    <div leaveDelay="25" onClick={handleTooltipOpen}>    
+                    <div onClick={handleTooltipOpen}>    
                         <Button 
                             disabled
                             onClick={openModal} 

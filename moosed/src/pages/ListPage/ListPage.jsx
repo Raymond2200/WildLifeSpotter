@@ -80,7 +80,7 @@ function ListPage(props) {
             {spots.map(spottedAnimal => (
                 <div className="list-item-container">
                     {setIcon(spottedAnimal.animalType)}
-                    <li className="list-head"><img className="list-head-image" src={markerIcon}/></li>
+                    <li className="list-head"><img alt="icon" className="list-head-image" src={markerIcon}/></li>
                     {trimDate(spottedAnimal.createdAt)}
                     <li className="list-seen">{`Seen at: ${newTime[1]}, ${newTime[2]} - ${newTime[3]}:${newTime[4]}`}</li>
                     <li className="list-user">{`User: ${spottedAnimal.user}`}</li>
