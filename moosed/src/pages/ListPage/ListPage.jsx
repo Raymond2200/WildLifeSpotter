@@ -8,10 +8,8 @@ function ListPage(props) {
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log("hello")
             let fetchSpotsResponse = await fetch('/api/spotteds/me/'+lng+'/'+lat)
-            let inSpots = await fetchSpotsResponse.json()
-            console.log(inSpots)   
+            let inSpots = await fetchSpotsResponse.json()  
             setSpots(inSpots)
         }
         fetchData()
