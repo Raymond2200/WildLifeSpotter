@@ -2,13 +2,14 @@ import './App.css';
 import Map from '../../components/Map/Map'
 import ListPage from '../ListPage/ListPage'
 import React, { Component } from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, Link } from 'react-router-dom';
 import { getCurrentLatLng} from '../../services/geolocation'
 import AuthPage from '../../pages/AuthPage/AuthPage';
 import MenuList from '../../components/MenuList/MenuList';
 import ToggleView from '../../components/ToggleView/ToggleView';
 import FilterSpotteds from '../../components/FilterSpotteds/FilterSpotteds';
 import AddSpot from '../../components/AddSpot/AddSpot';
+import Loading from '../../components/Loading/Loading'
 
 class App extends Component {
     state = {
@@ -17,6 +18,7 @@ class App extends Component {
         user:null,
         listview: false,
         spotteds: [],
+        isLoading: false,
     }
 
     handleDragMarker = (lat, lng) => {
@@ -45,13 +47,15 @@ class App extends Component {
                 user: userDoc,
                 lat: lat, 
                 lng: lng,
-                spotteds: inSpots
+                spotteds: inSpots,
+                isLoading: true,
             })      
         } else {
             this.setState({
                 lat: lat, 
                 lng: lng,
                 spotteds: inSpots,
+                isLoading: true,
             }) 
         }
     }
@@ -59,55 +63,67 @@ class App extends Component {
     render() {
         return (
         <div className="App">
-            <img src="Logo2.svg" alt="logo"></img>
-            <MenuList userState={this.state.user}/>
-            <Switch>
-            <Route path='/login-signup' render={(props) => (
-                <>
-                <AuthPage {...props} user={this.state.user} setUserInState={this.setUserInState}/>
-                <br/>
-                </>
-            )}/>
-            <Route path='/logout' render={this.handleLogout}/>
-            <Route path='/' render={(props) => (
-                <>
-                    {this.state.lat && this.state.listview === false ? (
-                        <Map
-                            {...props}
-                            lng={this.state.lng}
-                            lat={this.state.lat}
-                            spotteds={this.state.spotteds}
-                            handleDragMarker={this.handleDragMarker}
-                        />
-                     ) : ( 
-                         <ListPage
-                             {...props}
-                             lng={this.state.lng}
-                             lat={this.state.lat}
-                             spotteds={this.state.spotteds}
-                         />
-                     )}
-                    <footer>
-                    <div className="button-container">
-                        <ToggleView setListView={(listview) => this.setState({listview})}/>
-                        <FilterSpotteds 
-                            setSpotteds={(spotteds) => this.setState({spotteds})}
-                            user={this.state.user}
-                            lng={this.state.lng}
-                            lat={this.state.lat}
-                        />
-                        <AddSpot
-                            setSpotteds={(spotteds) => this.setState({spotteds})}
-                            user={this.state.user}
-                            lng={this.state.lng}
-                            lat={this.state.lat}
-                        />
-                    </div>
-                    </footer>
-                </>
-            )}/>
-            <Redirect to="/" />
-        </Switch>
+            <Link to="/">
+                <header>
+                    <img src="Logo2.svg" alt="logo"></img>
+                </header>
+            </Link>
+            {this.state.isLoading === false ? (
+                <div className="loading-frame">
+                    <Loading/>
+                </div>
+            ) : (
+                <div>
+                    <MenuList userState={this.state.user}/>
+                    <Switch>
+                    <Route path='/login-signup' render={(props) => (
+                        <>
+                        <AuthPage {...props} user={this.state.user} setUserInState={this.setUserInState}/>
+                        <br/>
+                        </>
+                    )}/>
+                    <Route path='/logout' render={this.handleLogout}/>
+                    <Route path='/' render={(props) => (
+                        <>
+                            {this.state.lat && this.state.listview === false ? (
+                                <Map
+                                    {...props}
+                                    lng={this.state.lng}
+                                    lat={this.state.lat}
+                                    spotteds={this.state.spotteds}
+                                    handleDragMarker={this.handleDragMarker}
+                                />
+                            ) : ( 
+                                <ListPage
+                                    {...props}
+                                    lng={this.state.lng}
+                                    lat={this.state.lat}
+                                    spotteds={this.state.spotteds}
+                                />
+                            )}
+                            <footer>
+                            <div className="button-container">
+                                <ToggleView setListView={(listview) => this.setState({listview})}/>
+                                <FilterSpotteds 
+                                    setSpotteds={(spotteds) => this.setState({spotteds})}
+                                    user={this.state.user}
+                                    lng={this.state.lng}
+                                    lat={this.state.lat}
+                                />
+                                <AddSpot
+                                    setSpotteds={(spotteds) => this.setState({spotteds})}
+                                    user={this.state.user}
+                                    lng={this.state.lng}
+                                    lat={this.state.lat}
+                                />
+                            </div>
+                            </footer>
+                        </>
+                    )}/>
+                    <Redirect to="/" />
+                    </Switch>
+                </div>
+            )}
         </div>
         );
     }
