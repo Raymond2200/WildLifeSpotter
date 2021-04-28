@@ -45,7 +45,7 @@ async function nearMeSpots(req, res) {
             //     {$gte: [new Date,(Date.now - 1 * 60 * 60 * 1000)]}
             // }
         )
-        console.log(spots)
+        // console.log(spots)
         res.json(spots)
     } catch(err) {
         console.log(err)
