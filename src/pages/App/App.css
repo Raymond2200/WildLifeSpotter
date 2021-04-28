@@ -4,6 +4,7 @@
   /* background-color: #0B3939;
   color: white; */
 }
+
 .App-link {
   color: #61dafb;
 }
@@ -20,13 +21,16 @@ footer {
   width: 100%;
   height: 10%;
   bottom: 0;
+  background-color: #0B3939;
 }
 header {
   height: 10%;
   background-color: #0b3939;
 }
+
 header img {
-  height: 90%;
+  height: 80%;
+  margin-top: 7px;
 }
 .loading-frame {
   display: flex;

@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import Button from '@material-ui/core/Button';
 
+
 class ToggleView extends Component {
     state = {
         toggle: true,

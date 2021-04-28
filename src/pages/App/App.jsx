@@ -93,7 +93,8 @@ class App extends Component {
         <div className="App">
             <Link to="/">
                 <header>
-                    <img src="Logo2.svg" alt="logo"></img>
+                    {/* <object fontFamily="AzoSans" data="Logo2.svg" alt="logo"></object> */}
+                    <img src="Logo-png.png" alt="logo"></img>
                 </header>
             </Link>
             {this.state.isLoading === false ? (
