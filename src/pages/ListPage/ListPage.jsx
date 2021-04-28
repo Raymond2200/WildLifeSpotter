@@ -28,18 +28,11 @@ function ListPage(props) {
         function deg2rad(deg) {
             return deg * (Math.PI/180)
         }
-
-        let newTime = []
-        function trimDate(dbItemDate) {
-            const months = [ "January", "February", "March", "April", "May", "June", 
-           "July", "August", "September", "October", "November", "December" ];
-            newTime = dbItemDate.split(/-|T|:/)
-            while(newTime[1][0] === '0') {
-                newTime[1] = newTime[1].substring(1)
-            }
-            let monthName = months[newTime[1] - 1]
-            newTime.splice(1, 1, monthName)
-            
+        let newTime = undefined
+        let convertTime= (time) =>{
+            let test = new Date(time)
+            test = test.toString()
+            newTime = test.split(' ')
         }
 
         let markerIcon = ""
@@ -76,8 +69,8 @@ function ListPage(props) {
                 <div className="list-item-container">
                     {setIcon(spottedAnimal.animalType)}
                     <li className="list-head"><img alt="icon" className="list-head-image" src={markerIcon}/></li>
-                    {trimDate(spottedAnimal.createdAt)}
-                    <li className="list-seen">{`Seen at: ${newTime[1]}, ${newTime[2]} - ${newTime[3]}:${newTime[4]}`}</li>
+                    {convertTime(spottedAnimal.updatedAt)}
+                    <li className="list-seen">{`Seen at: ${newTime[1]}, ${newTime[2]} - ${newTime[4]}`}</li>
                     <li className="list-user">{`User: ${spottedAnimal.user.username}`}</li>
                     <li className="list-comment">{`Comment: ${spottedAnimal.description}`}</li>
                     <li className="list-distance">{`Distance: ${getDistanceFromLatLonInKm(lat, lng, spottedAnimal.location.coordinates[1], spottedAnimal.location.coordinates[0])}`}</li>
