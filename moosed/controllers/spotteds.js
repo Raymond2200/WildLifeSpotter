@@ -18,6 +18,7 @@ async function create(req, res) {
             description: req.body.description,
             user: req.user._id
         })
+        console.log(newspot)
         using = await User.findById(req.user._id)
         using.spots.push(newSpot)
         using.save()
@@ -29,7 +30,8 @@ async function create(req, res) {
 
 async function nearMeSpots(req, res) {
     let time = new Date
-    time.setHours(8)
+    time.setHours(12)
+    tt=new Date
     try{
         await Spotted.find({ 
             $and:[{
@@ -44,6 +46,8 @@ async function nearMeSpots(req, res) {
             }},{
             updatedAt : {$gte: time}}] 
         }).populate('user').exec((err, spotteds) =>  {res.json(spotteds)})
+        console.log("test",time)
+        console.log(tt)
     } catch(err) {
         console.log(err)
         res.send("500 Internal Server Error")
