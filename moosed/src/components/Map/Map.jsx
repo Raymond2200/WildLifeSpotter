@@ -4,7 +4,7 @@ import styles from './Map.module.css';
 
 class Map extends Component {
     mapDiv = React.createRef();
-    setMap() {
+    setMap = () => {
         let savedVals = [];
         let spotteds = this.props.spotteds;
         let prev_infowindow = false;
@@ -155,7 +155,6 @@ class Map extends Component {
             let description = spot.description;
             savedVals.push([animalType, location, description]);
         });
-        console.log('savedvals', savedVals)
         if (map) {
             savedVals.forEach((spot) => {
                 const contentString =
@@ -225,6 +224,7 @@ class Map extends Component {
     }
     componentDidMount() {
         this.setMap()
+        
     }
     componentDidUpdate() {
         this.recenterMap();
