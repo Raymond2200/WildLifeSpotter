@@ -7,7 +7,7 @@ class Map extends Component {
     state = {
         map: null,
     }
-    setMap() {
+    setMap = () => {
         if(this.props.lat && this.props.lng) {
             const location = {
                 lat: this.props.lat, 
@@ -44,7 +44,6 @@ class Map extends Component {
             });
             dragMarker.addListener("animation_changed", () => {
                 initwindow.open(this.state.map, dragMarker);
-
             });
             window.google.maps.event.addListener(dragMarker, 'dragend', (evt) => {
                 let dragLat = dragMarker.getPosition().lat();
@@ -149,6 +148,7 @@ class Map extends Component {
     }
     componentDidMount() {
         this.setMap()
+        
     }
     componentDidUpdate(prevProps) {
         if (this.props.location !== prevProps.location) {

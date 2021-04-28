@@ -55,12 +55,11 @@ class App extends Component {
             }) 
         }
     }
+
     render() {
         return (
         <div className="App">
-            {/* <h2>Moose on the Loose</h2> */}
-            {/* <img src="Logo.svg"></img> */}
-            <img src="Logo2.svg"></img>
+            <img src="Logo2.svg" alt="logo"></img>
             <MenuList userState={this.state.user}/>
             <Switch>
             <Route path='/login-signup' render={(props) => (
@@ -72,7 +71,7 @@ class App extends Component {
             <Route path='/logout' render={this.handleLogout}/>
             <Route path='/' render={(props) => (
                 <>
-                    {!this.state.listview ? (
+                    {this.state.lat && this.state.listview === false ? (
                         <Map
                             {...props}
                             lng={this.state.lng}
@@ -80,27 +79,31 @@ class App extends Component {
                             spotteds={this.state.spotteds}
                             handleDragMarker={this.handleDragMarker}
                         />
-                    ) : ( 
-                        <ListPage
-                            {...props}
-                            lng={this.state.lng}
-                            lat={this.state.lat}
-                            spotteds={this.state.spotteds}
-                        />
-                    )}
+                     ) : ( 
+                         <ListPage
+                             {...props}
+                             lng={this.state.lng}
+                             lat={this.state.lat}
+                             spotteds={this.state.spotteds}
+                         />
+                     )}
+                    <footer>
                     <div className="button-container">
                         <ToggleView setListView={(listview) => this.setState({listview})}/>
                         <FilterSpotteds 
                             setSpotteds={(spotteds) => this.setState({spotteds})}
+                            user={this.state.user}
                             lng={this.state.lng}
                             lat={this.state.lat}
                         />
                         <AddSpot
                             setSpotteds={(spotteds) => this.setState({spotteds})}
+                            user={this.state.user}
                             lng={this.state.lng}
                             lat={this.state.lat}
                         />
                     </div>
+                    </footer>
                 </>
             )}/>
             <Redirect to="/" />
