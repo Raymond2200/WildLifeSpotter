@@ -27,24 +27,24 @@
     }
 }
 .menu-bar-one {
-    height: 6px;
+    height: 5px;
     width: 80%;
-    background-color: rgba(37, 37, 37, 0.9);
+    background-color: #136464;
     margin: 5px 5px 5px 0;
     border-radius: 3px;
 }
 .menu-bar-two {
-    height: 6px;
+    height: 5px;
     width: 50%;
-    background-color: rgba(37, 37, 37, 0.9);
+    background-color: #136464;
     margin: 5px 5px 5px 0;
     border-radius: 3px;
     transition: 0.3s;
 }
 .menu-bar-three {
-    height: 6px;
+    height: 5px;
     width: 60%;
-    background-color: rgba(37, 37, 37, 0.9);
+    background-color: #136464;
     margin: 5px 5px 5px 0;
     border-radius: 3px;
     transition: 0.3s;

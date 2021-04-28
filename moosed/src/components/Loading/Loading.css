@@ -1,0 +1,10 @@
+#loading-container {
+    margin: 0 auto;
+    display: block;
+    color: #0b3939;
+    font-weight: 500;
+    align-self: center;
+}
+#loading-grphx {
+    color: #0b3939;
+}

@@ -79,6 +79,7 @@ function ListPage(props) {
     return (
         <div>
             <div id="list-container"> 
+            <br/>
             {spots.map(spottedAnimal => (
                 <div className="list-item-container">
                     {setIcon(spottedAnimal.animalType)}

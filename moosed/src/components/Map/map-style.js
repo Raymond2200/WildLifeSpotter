@@ -165,15 +165,15 @@ export default [
       }
     ]
   },
-  {
-    "featureType": "poi.school",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "color": "#89aecc"
-      }
-    ]
-  },
+  // {
+  //   "featureType": "poi.school",
+  //   "elementType": "geometry.fill",
+  //   "stylers": [
+  //     {
+  //       "color": "#89aecc"
+  //     }
+  //   ]
+  // },
   {
     "featureType": "poi.sports_complex",
     "elementType": "geometry.fill",
@@ -196,7 +196,7 @@ export default [
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#f5f1e6"
+        "color": "#7e9188"
       }
     ]
   },
