@@ -41,6 +41,7 @@ async function nearMeSpots(req, res) {
                     $maxDistance: 100000,
                     $minDistance: 0
                 }
+//         res.json(spots) ** does this need to be hear? was in older code, seems important
             }},{
             updatedAt : {$gte: time}}] 
         }).populate('user').exec((err, spotteds) =>  {res.json(spotteds)})

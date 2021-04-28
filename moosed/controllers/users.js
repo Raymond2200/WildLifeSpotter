@@ -14,8 +14,8 @@ async function create(req, res) {
     const hashedPassword = await bcrypt.hash(req.body.password, SALT_ROUNDS)
     const user = await User.create({username: req.body.username, email:req.body.email, password:hashedPassword,});
 
-    const token = jwt.sign({ user }, process.env.SECRET,{ expiresIn: '24h' });
-    res.json("200 OK" + token);
+    const token = jwt.sign({ user }, process.env.SECRET,{ expiresIn: '72h' });
+    res.json(token);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -26,7 +26,7 @@ async function login(req, res) {
     const user = await User.findOne({ email: req.body.email });
     if (!(await bcrypt.compare(req.body.password, user.password))) throw new Error();
 
-    const token = jwt.sign({ user }, process.env.SECRET,{ expiresIn: '24h' });
+    const token = jwt.sign({ user }, process.env.SECRET,{ expiresIn: '72h' });
     res.json(token)
   } catch {
     res.status(400).json('Bad Credentials');

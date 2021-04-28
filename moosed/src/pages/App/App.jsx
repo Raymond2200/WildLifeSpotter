@@ -38,7 +38,7 @@ class App extends Component {
         const {lat, lng} = await getCurrentLatLng()
         let token = localStorage.getItem('token')
         let fetchSpotsResponse = await fetch('/api/spotteds/me/'+lng+'/'+lat)
-            let inSpots = await fetchSpotsResponse.json()
+        let inSpots = await fetchSpotsResponse.json()
         if (token) {
             let userDoc = JSON.parse(atob(token.split('.')[1])).user
             this.setState({
