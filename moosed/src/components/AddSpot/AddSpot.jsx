@@ -61,7 +61,7 @@ function AddSpot(props) {
                     </Tooltip>
                 </ClickAwayListener>
             )}
-            <SpotForm ref={spotRef} lng={props.lng} lat={props.lat} setSpotteds={props.setSpotteds}/>
+            <SpotForm ref={spotRef} lng={props.lng} lat={props.lat} setSpotteds={props.setSpotteds} loadSpots={props.loadSpots}/>
         </div>
     )
 }
