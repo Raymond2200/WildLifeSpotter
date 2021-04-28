@@ -8,9 +8,11 @@ function ListPage(props) {
 
     useEffect(() => {
         const fetchData = async () => {
+            console.log("hello")
             let fetchSpotsResponse = await fetch('/api/spotteds/me/'+lng+'/'+lat)
             let inSpots = await fetchSpotsResponse.json()
-            setSpots(inSpots)   
+            console.log(inSpots)   
+            setSpots(inSpots)
         }
         fetchData()
     },[])
@@ -83,7 +85,7 @@ function ListPage(props) {
                     <li className="list-head"><img alt="icon" className="list-head-image" src={markerIcon}/></li>
                     {trimDate(spottedAnimal.createdAt)}
                     <li className="list-seen">{`Seen at: ${newTime[1]}, ${newTime[2]} - ${newTime[3]}:${newTime[4]}`}</li>
-                    <li className="list-user">{`User: ${spottedAnimal.user}`}</li>
+                    <li className="list-user">{`User: ${spottedAnimal.user.username}`}</li>
                     <li className="list-comment">{`Comment: ${spottedAnimal.description}`}</li>
                     <li className="list-distance">{`Distance: ${getDistanceFromLatLonInKm(lat, lng, spottedAnimal.location.coordinates[1], spottedAnimal.location.coordinates[0])}`}</li>
                     <li className="list-hr"><hr/></li>
