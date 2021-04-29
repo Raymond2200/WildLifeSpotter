@@ -44,6 +44,12 @@ class Map extends Component {
             dragMarker.addListener("animation_changed", () => {
                 initwindow.open(this.mapRef, dragMarker);
             });
+            window.google.maps.event.addListener(this.mapRef, 'click', (evt) => {
+                dragMarker.setPosition(evt.latLng);
+                let clickLat = dragMarker.getPosition().lat();
+                let clickLng = dragMarker.getPosition().lng();
+                this.props.handleDragMarker(clickLat, clickLng);
+            })
             window.google.maps.event.addListener(dragMarker, 'dragend', (evt) => {
                 let dragLat = dragMarker.getPosition().lat();
                 let dragLng = dragMarker.getPosition().lng();
