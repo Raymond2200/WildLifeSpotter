@@ -31,7 +31,7 @@ async function create(req, res) {
 async function nearMeSpots(req, res) {
     let time = new Date
     time.setHours(-2)
-    tt=new Date
+    tt=new Date 
     try{
         await Spotted.find({ 
             $and:[{
