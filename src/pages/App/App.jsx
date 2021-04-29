@@ -29,7 +29,6 @@ class App extends Component {
         })
     }
     handleLogout = () => {
-        console.log("logout hit")
         localStorage.clear();
         this.setState({user: null})
         return <Redirect to="/"/>

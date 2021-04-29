@@ -84,10 +84,16 @@ let SpotForm = forwardRef((props, ref) => {
                         </FormControl>
                         <InputLabel >Comments</InputLabel>
                         <Input onChange={handleComment}/>
-                        <Button onClick={ () => {
-                            close();
-                            handleSubmit()
-                        }}>Submit</Button>
+                        <br/>
+                        <br/>
+                        <Button 
+                            variant="contained"
+                            onClick={ () => {
+                                close();
+                                handleSubmit()
+                        }}>
+                            Submit
+                        </Button>
                     </div>
                 </div>
         )
