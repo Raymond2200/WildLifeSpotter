@@ -1,11 +1,17 @@
-# WildLifeSpotter
-### Project team members
+# The Moose Tracker
+### Project contributors
 * [Raymond Casgrain](https://github.com/Raymond2200)
 * [Matthew Nixon](https://github.com/mdpnixon)
 * [Logan Major](https://github.com/logan858)
 
+## Description:
 
-Wild life spotter:
+
+
+## The app
+### Home Page
+(https://github.com/Raymond2200/WildLifeSpotter/blob/main/images/Home-map.PNG)
+
 
 MVP:
 > * [ ] Google maps api
