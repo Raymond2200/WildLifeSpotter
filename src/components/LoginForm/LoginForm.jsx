@@ -1,8 +1,10 @@
 import { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Box from '@material-ui/core/Box';
 import { withStyles } from "@material-ui/core/styles";
 import { Redirect } from 'react-router-dom';
+
 
 const styles = theme => ({
   root: {
@@ -56,9 +58,11 @@ class LoginForm extends Component {
     return (
       <div>
         { this.state.doRedirect && <Redirect to="/" /> }
-        <div className="form-container">
-          <form autoComplete="off" className={classes.root}  onSubmit={this.handleSubmit}>
+        <div className="form-container" p={2}>
+          <form autoComplete="off" p={2} className={classes.root}  onSubmit={this.handleSubmit}>
+          <Box m={0} mt={4}>
           <TextField
+              align="center"
               id="outlined-helperText"
               label="Email"
               variant="outlined"
@@ -68,24 +72,35 @@ class LoginForm extends Component {
               onChange={this.handleChange}
               required
           />
-          <TextField
-              id="outlined-helperText"
-              label="Password"
-              variant="outlined"
-              name="password"
-              type="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-              required
-          />
-          <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-          >
-              LOGIN
-          </Button>
+          </Box>
+          <br />
+          <Box>
+            <TextField
+                id="outlined-helperText"
+                label="Password"
+                variant="outlined"
+                name="password"
+                type="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+                required
+            />
+          </Box>
+          <br/>
+          <Box m={0}>
+            <Button
+              className="button"
+                variant="contained"
+                color="primary"
+                type="submit"
+            >
+                LOGIN
+            </Button>
+          </Box>
           </form>
+          <Box mt={5} mb={-3}>
+            <h3>Don't have an account? <br/> Sign up here!</h3>
+          </Box>
         </div>
         <p className="error-message">&nbsp;{this.state.error}</p>
       </div>
