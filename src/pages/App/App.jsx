@@ -30,7 +30,9 @@ class App extends Component {
     }
     handleLogout = () => {
         localStorage.clear();
-        this.setState({user: null})
+        this.setState({
+            user: null,
+        })
         return <Redirect to="/"/>
     }
     setUserInState = (incomingUserData) => {
@@ -38,7 +40,13 @@ class App extends Component {
     }
 
     loadSpots = async (lat=this.state.lat, lng=this.state.lng) => {
-        if (this.state.filter === "recent") {
+        let filter = this.state.filter
+        if(this.state.filter === 'my') {
+            if(this.state.user === null) {
+                filter="recent"
+            }
+        }
+        if (filter === "recent") {
             try{
                 let fetchSpotsResponse = await fetch('/api/spotteds/me/'+lng+'/'+lat)
                 let inSpots = await fetchSpotsResponse.json()
@@ -46,7 +54,7 @@ class App extends Component {
             } catch (err) {
                 console.log(err+"Bad Request")
         }
-        } else if (this.state.filter === "my") {
+        } else if (filter === "my") {
             try{
                 let jwt = localStorage.getItem('token')
                 let fetchSpotsResponse = await fetch('/api/spotteds/myspots', {headers: {'Authorization': 'Bearer ' + jwt}})
@@ -55,7 +63,7 @@ class App extends Component {
             } catch (err) {
                 console.log(err+"Bad Request")
         }
-        } else if (this.state.filter === "archive") {
+        } else if (filter === "archive") {
             try {
                 let fetchSpotsResponse = await fetch('/api/spotteds/archived/'+lng+'/'+lat)
                 let inSpots = await fetchSpotsResponse.json()
@@ -86,7 +94,12 @@ class App extends Component {
             }) 
         }
     }
-
+    componentDidUpdate() {
+        if(this.state.user === null && this.state.filter === 'my') {
+            this.setState({filter: 'recent'})
+            this.loadSpots()
+        }
+    }
     render() {
         return (
         <div className="App">
@@ -118,6 +131,8 @@ class App extends Component {
                                     lng={this.state.lng}
                                     lat={this.state.lat}
                                     spotteds={this.state.spotteds}
+                                    // setSpotteds={(spotteds) => {this.setState({spotteds})}}
+                                    listView={this.state.listview}
                                     handleDragMarker={this.handleDragMarker}
                                     filter={this.state.filter}
                                 />
