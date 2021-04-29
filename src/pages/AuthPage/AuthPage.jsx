@@ -30,7 +30,7 @@ export default class AuthPage extends Component {
         ) : ( 
           <SignUpForm user={this.props.user} setUserInState={this.props.setUserInState} />
         )}
-          <Box m={-2}>
+          <Box m={-1}>
             <ThemeProvider theme={theme}>
               <Button className="changeForm"variant="contained" color="primary" type="submit" onClick={() => this.setState({ showLogin: !this.state.showLogin })}>
                 {this.state.showLogin ? 'SIGN UP' : 'LOG IN'}

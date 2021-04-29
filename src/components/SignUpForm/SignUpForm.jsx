@@ -23,7 +23,6 @@ const theme = createMuiTheme({
   }
 });
 
-
 class SignUpForm extends Component {
     state = {
         username: '',
@@ -71,70 +70,79 @@ class SignUpForm extends Component {
         { this.state.doRedirect && <Redirect to="/" /> }
         <div className="form-container">
           <form className={classes.root} autoComplete="off" onSubmit={this.handleSubmit}>
-          <ThemeProvider theme={theme}>
           <Box mt={4}>
-            <TextField
-                id="outlined-helperText"
-                label="Username"
-                variant="outlined"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleChange}
-                required
-            />
+            <ThemeProvider theme={theme}>
+              <TextField
+                  id="outlined-helperText"
+                  label="Username"
+                  variant="outlined"
+                  name="username"
+                  value={this.state.username}
+                  onChange={this.handleChange}
+                  required
+              />
+            </ThemeProvider>
           </Box>
           <br/>
           <Box>
-            <TextField
-                id="outlined-helperText"
-                label="Email"
-                variant="outlined"
-                name="email"
-                type="email"
-                value={this.state.email}
-                onChange={this.handleChange}
-                required
-            />
+            <ThemeProvider theme={theme}>
+              <TextField
+                  id="outlined-helperText"
+                  label="Email"
+                  variant="outlined"
+                  name="email"
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                  required
+              />
+            </ThemeProvider>
           </Box>
           <br/>
           <Box>
-            <TextField
-                id="outlined-helperText"
-                label="Password"
-                variant="outlined"
-                name="password"
-                type="password"
-                value={this.state.password}
-                onChange={this.handleChange}
-                required
-            />
+            <ThemeProvider theme={theme}>
+              <TextField
+                  id="outlined-helperText"
+                  label="Password"
+                  variant="outlined"
+                  name="password"
+                  type="password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                  required
+              />
+            </ThemeProvider>
           </Box>
           <br/>
           <Box>
-            <TextField
-                id="outlined-helperText"
-                label="Confirm Password"
-                variant="outlined"
-                name="confirm"
-                type="password"
-                value={this.state.confirm}
-                onChange={this.handleChange}
-                required
-            />
+            <ThemeProvider theme={theme}>
+              <TextField
+                  id="outlined-helperText"
+                  label="Confirm Password"
+                  variant="outlined"
+                  name="confirm"
+                  type="password"
+                  value={this.state.confirm}
+                  onChange={this.handleChange}
+                  required
+              />
+            </ThemeProvider>
           </Box>
           <br/>
-          <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-              disabled={disable}
-          >
-              SIGN UP
-          </Button>
+          <ThemeProvider theme={theme}>
+            <Button
+                theme='theme'
+                variant="contained"
+                color="primary"
+                type="submit"
+                disabled={disable}
+            >
+                SIGN UP
+            </Button>
           </ThemeProvider>
           </form>
           <Box mt={5} mb={-3}>
-          <h3>Have an account? <br/> Log in here!</h3>
+          <h3 style={{color: '#0b3939'}}>Have an account? <br/> Log in here!</h3>
           </Box>
         </div>
         <p className="error-message">&nbsp;{this.state.error}</p>

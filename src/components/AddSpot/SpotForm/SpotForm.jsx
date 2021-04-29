@@ -5,9 +5,18 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Box from '@material-ui/core/Box';
 import './SpotForm.css';
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: '#0b3939'
+        },
+    }
+  });
+  
  
 let SpotForm = forwardRef((props, ref) => {
     
@@ -95,11 +104,16 @@ let SpotForm = forwardRef((props, ref) => {
                                 variant="filled"
                             />
                         </Box>
-                        <Button onClick={ () => {
-                            close();
-                            handleSubmit()
-                            }}>Submit
-                        </Button>
+                        <ThemeProvider theme={theme}>
+                            <Button 
+                                variant="contained"
+                                color="primary"
+                                onClick={ () => {
+                                    close();
+                                    handleSubmit()
+                                }}>Submit
+                            </Button>
+                        </ThemeProvider>
                     </div>
                 </div>
         )
