@@ -5,6 +5,8 @@ import styles from './Map.module.css';
 class Map extends Component {
     mapDiv = React.createRef();
     mapRef = React.createRef();
+    markersRef = React.createRef([]);
+
     setMap = () => {
         if(this.props.lat && this.props.lng) {
             const location = {
@@ -55,11 +57,15 @@ class Map extends Component {
                 let dragLng = dragMarker.getPosition().lng();
                 this.props.handleDragMarker(dragLat, dragLng);
             });
-            this.drawMarkers();
+            if(this.markersRef.length === 0 && this.props.listView === false) {
+                this.drawMarkers();
+            } else if (this.markersRef.current === null) {
+                this.drawMarkers();
+            }
         }
     }
     drawMarkers() {
-        let savedVals = [];
+        this.markersRef = []
         let spotteds = this.props.spotteds;
         let prev_infowindow = false;
         let newTime = undefined
@@ -67,7 +73,6 @@ class Map extends Component {
             let test = new Date(time)
             test = test.toString()
             newTime = test.split(/\s|:/)
-
             return `Spotted on ${newTime[1]} ${newTime[2]} at ${newTime[4]}:${newTime[5]}`
         }
         spotteds.forEach((spot) => {
@@ -77,9 +82,9 @@ class Map extends Component {
                 lng: spot.location.coordinates[0]}
             let description = spot.description;
             let dateTime = convertTime(spot.updatedAt)
-            savedVals.push([animalType, location, description, dateTime]);
+            this.markersRef.push([animalType, location, description, dateTime]);
         });
-        savedVals.forEach((spot) => {
+        this.markersRef.forEach((spot) => {
             const contentString =
                 `<div id="content">` +
                 `<h1 id="animalType">${spot[0]}</h1>` +
