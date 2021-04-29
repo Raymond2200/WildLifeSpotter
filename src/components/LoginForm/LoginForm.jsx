@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import { withStyles } from "@material-ui/core/styles";
 import { Redirect } from 'react-router-dom';
-
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 const styles = theme => ({
   root: {
@@ -13,6 +13,14 @@ const styles = theme => ({
       width: '25ch',
     },
   },
+});
+
+const theme = createMuiTheme({
+  palette: {
+      primary: {
+          main: '#0b3939'
+      },
+  }
 });
 
 class LoginForm extends Component {
@@ -60,46 +68,49 @@ class LoginForm extends Component {
         { this.state.doRedirect && <Redirect to="/" /> }
         <div className="form-container" p={2}>
           <form autoComplete="off" p={2} className={classes.root}  onSubmit={this.handleSubmit}>
-          <Box m={0} mt={4}>
-          <TextField
-              align="center"
-              id="outlined-helperText"
-              label="Email"
-              variant="outlined"
-              name="email"
-              type="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-              required
-          />
-          </Box>
-          <br />
-          <Box>
-            <TextField
-                id="outlined-helperText"
-                label="Password"
-                variant="outlined"
-                name="password"
-                type="password"
-                value={this.state.password}
-                onChange={this.handleChange}
-                required
-            />
-          </Box>
-          <br/>
-          <Box m={0}>
-            <Button
-              className="button"
-                variant="contained"
-                color="primary"
-                type="submit"
-            >
-                LOGIN
-            </Button>
-          </Box>
+          <ThemeProvider theme={theme}>
+            <Box m={0} mt={4}>
+              <TextField
+                  align="center"
+                  id="outlined-helperText"
+                  label="Email"
+                  variant="outlined"
+                  name="email"
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                  required
+              />
+            </Box>
+            <br />
+            <Box>
+              <TextField
+                  id="outlined-helperText"
+                  label="Password"
+                  variant="outlined"
+                  name="password"
+                  type="password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                  required
+              />
+            </Box>
+            <br/>
+            
+              <Box m={0}>
+                <Button
+                  className="button"
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                >
+                    LOGIN
+                </Button>
+              </Box>
+            </ThemeProvider>
           </form>
           <Box mt={5} mb={-3}>
-            <h3>Don't have an account? <br/> Sign up here!</h3>
+            <h3 style={{color:'#0b3939'}}>Don't have an account? <br/> Sign up here!</h3>
           </Box>
         </div>
         <p className="error-message">&nbsp;{this.state.error}</p>
