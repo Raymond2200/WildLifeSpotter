@@ -30,7 +30,7 @@ async function create(req, res) {
 
 async function nearMeSpots(req, res) {
     let time = new Date
-    time.setHours(12)
+    time.setHours(-2)
     tt=new Date
     try{
         await Spotted.find({ 
@@ -46,7 +46,7 @@ async function nearMeSpots(req, res) {
             }},{
             updatedAt : {$gte: time}}] 
         }).populate('user').exec((err, spotteds) =>  {res.json(spotteds)})
-        console.log("test",time)
+        console.log(time)
         console.log(tt)
     } catch(err) {
         console.log(err)
