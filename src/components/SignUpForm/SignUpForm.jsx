@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import { withStyles } from "@material-ui/core/styles";
 import { Redirect } from 'react-router-dom';
 import Box from '@material-ui/core/Box';
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 const styles = theme => ({
     root: {
@@ -13,6 +14,15 @@ const styles = theme => ({
         },
     },
 });
+
+const theme = createMuiTheme({
+  palette: {
+      primary: {
+          main: '#0b3939'
+      },
+  }
+});
+
 
 class SignUpForm extends Component {
     state = {
@@ -61,6 +71,7 @@ class SignUpForm extends Component {
         { this.state.doRedirect && <Redirect to="/" /> }
         <div className="form-container">
           <form className={classes.root} autoComplete="off" onSubmit={this.handleSubmit}>
+          <ThemeProvider theme={theme}>
           <Box mt={4}>
             <TextField
                 id="outlined-helperText"
@@ -120,6 +131,7 @@ class SignUpForm extends Component {
           >
               SIGN UP
           </Button>
+          </ThemeProvider>
           </form>
           <Box mt={5} mb={-3}>
           <h3>Have an account? <br/> Log in here!</h3>
