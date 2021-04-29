@@ -1,32 +1,53 @@
-import { Component } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
+const useStyles = makeStyles({
+    root: {
+      color: '#0b3939',
+      backgroundColor: 'white',
+    },
+  });
 
-class ToggleView extends Component {
-    state = {
-        toggle: true,
-    }
-    handleClick = () => {
-        if(this.state.toggle === true) {
-            this.setState({toggle: false})
-            this.props.setListView(this.state.toggle)
-        } else {
-            this.setState({toggle: true})
-            this.props.setListView(this.state.toggle)
+const theme = createMuiTheme({
+    overrides: {
+        MuiTouchRipple: {
+            child: {
+                backgroundColor: '#000'
+            }
         }
     }
-    render() {
-        return (
-            <div>
+});
+
+function ToggleView(props) {
+    const [toggle, setToggle] = React.useState(true)
+    const classes = useStyles();
+
+    const handleClick = () => {
+        if(toggle === true) {
+            setToggle(false)
+            props.setListView(toggle)
+        } else {
+            setToggle(true)
+            props.setListView(toggle)
+        }
+    }
+    return (
+        <div>
+            <ThemeProvider theme={theme}>
                 <Button 
+                    classes={{
+                        root: classes.root,
+                    }}
                     variant="contained"
                     onClick={() => { 
-                        this.handleClick() }}>
+                        handleClick() }}>
                         Toggle View
                 </Button>
-            </div>
-        )
-    }
+            </ThemeProvider>
+        </div>
+    )
 }
 
 
