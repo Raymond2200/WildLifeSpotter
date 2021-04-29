@@ -165,8 +165,10 @@ class Map extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.lat !== prevProps.lat) {
             this.recenterMap();
-        } else if (this.props.spotteds !== prevProps.spotteds){
+        } else if (this.props.spotteds !== prevProps.spotteds) {
             this.drawMarkers();
+        } else if (this.props.filter !== prevProps.filter) {
+            this.setMap();
         }
     }
     render () {
