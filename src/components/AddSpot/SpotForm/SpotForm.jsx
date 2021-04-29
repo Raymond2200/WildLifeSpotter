@@ -1,11 +1,12 @@
 import {useState, forwardRef, useImperativeHandle } from 'react';
 import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
+import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import Box from '@material-ui/core/Box';
 import './SpotForm.css';
  
 let SpotForm = forwardRef((props, ref) => {
@@ -64,26 +65,36 @@ let SpotForm = forwardRef((props, ref) => {
                     <div onClick={close} className={"modal-backdrop"}/>
                     <div className={"modal-box"}>
                         <div className={"exit"}/>
-                        <h1>What did you see?</h1>
+                        <h2>What did you see?</h2>
                         <FormControl>
-                            <InputLabel id="demo-simple-select-label">Animal</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-helper-label"
-                                id="demo-simple-select-helper"
-                                value={category}
-                                onChange={handleCategory}
-                            >
-                                <MenuItem value={"Moose"}>Moose</MenuItem>
-                                <MenuItem value={"Bear"}>Bear</MenuItem>
-                                <MenuItem value={"Deer"}>Deer</MenuItem>
-                                <MenuItem value={"Cougar"}>Mountain Cat</MenuItem>
-                                <MenuItem value={"Wolf"}>Wolf/Coyote</MenuItem>
-                                <MenuItem value={"Skunk"}>Skunk</MenuItem>
-                            </Select>
-                            <FormHelperText>Type of Animal</FormHelperText>
+                            <label>Type of Animal</label>
+                            <Box mb={3}>
+                                <Select
+                                    labelId="demo-simple-select-helper-label"
+                                    id="demo-simple-select-helper"
+                                    value={category}
+                                    onChange={handleCategory}
+                                >
+                                    <MenuItem value={"Moose"}>Moose</MenuItem>
+                                    <MenuItem value={"Bear"}>Bear</MenuItem>
+                                    <MenuItem value={"Deer"}>Deer</MenuItem>
+                                    <MenuItem value={"Cougar"}>Mountain Cat</MenuItem>
+                                    <MenuItem value={"Wolf"}>Wolf/Coyote</MenuItem>
+                                    <MenuItem value={"Skunk"}>Skunk</MenuItem>
+                                </Select>
+                            </Box>
                         </FormControl>
-                        <InputLabel >Comments</InputLabel>
-                        <Input onChange={handleComment}/>
+                        <Box m={3}>
+                            <Box mb={2}>
+                                <InputLabel>Comments</InputLabel>
+                            </Box>
+                            <TextField
+                                onChange={handleComment}
+                                multiline
+                                rows={3}
+                                variant="filled"
+                            />
+                        </Box>
                         <Button onClick={ () => {
                             close();
                             handleSubmit()
