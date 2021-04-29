@@ -10,7 +10,7 @@
 
 ## The app
 ### Home Page
-(https://github.com/Raymond2200/WildLifeSpotter/blob/main/images/Home-map.PNG)
+![Home](https://github.com/Raymond2200/WildLifeSpotter/blob/main/images/Home-map.PNG)
 
 
 MVP:
