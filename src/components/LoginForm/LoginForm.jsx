@@ -20,7 +20,7 @@ const theme = createMuiTheme({
       primary: {
           main: '#0b3939'
       },
-  }
+  },
 });
 
 class LoginForm extends Component {
@@ -68,8 +68,8 @@ class LoginForm extends Component {
         { this.state.doRedirect && <Redirect to="/" /> }
         <div className="form-container" p={2}>
           <form autoComplete="off" p={2} className={classes.root}  onSubmit={this.handleSubmit}>
-          <ThemeProvider theme={theme}>
             <Box m={0} mt={4}>
+            <ThemeProvider theme={theme}>
               <TextField
                   align="center"
                   id="outlined-helperText"
@@ -81,39 +81,44 @@ class LoginForm extends Component {
                   onChange={this.handleChange}
                   required
               />
+              </ThemeProvider>
             </Box>
             <br />
             <Box>
-              <TextField
-                  id="outlined-helperText"
-                  label="Password"
-                  variant="outlined"
-                  name="password"
-                  type="password"
-                  value={this.state.password}
-                  onChange={this.handleChange}
-                  required
-              />
+              <ThemeProvider theme={theme}>
+                <TextField
+                    id="outlined-helperText"
+                    label="Password"
+                    variant="outlined"
+                    name="password"
+                    type="password"
+                    value={this.state.password}
+                    onChange={this.handleChange}
+                    required
+                />
+              </ThemeProvider>
             </Box>
             <br/>
-            
               <Box m={0}>
-                <Button
-                  className="button"
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                >
-                    LOGIN
-                </Button>
+                <ThemeProvider theme={theme}>
+                  <Button
+                      className="button"
+                      theme='theme'
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                  >
+                      LOGIN
+                  </Button>
+                </ThemeProvider>
               </Box>
-            </ThemeProvider>
+            
           </form>
-          <Box mt={5} mb={-3}>
+            <p className="error-message" style={{color: 'red'}}>&nbsp;{this.state.error}</p>
+          <Box mt={5} mb={-1}>
             <h3 style={{color:'#0b3939'}}>Don't have an account? <br/> Sign up here!</h3>
           </Box>
         </div>
-        <p className="error-message">&nbsp;{this.state.error}</p>
       </div>
     );
   }
