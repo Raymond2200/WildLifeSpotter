@@ -11,7 +11,7 @@ import './SpotForm.css';
 let SpotForm = forwardRef((props, ref) => {
     
     let [display, setDisplay] = useState(false);
-    let [category, setCategory] = useState("moose");
+    let [category, setCategory] = useState("Moose");
     let [comment, setComment] = useState("");
 
     let handleComment = (e) => {
@@ -84,10 +84,16 @@ let SpotForm = forwardRef((props, ref) => {
                         </FormControl>
                         <InputLabel >Comments</InputLabel>
                         <Input onChange={handleComment}/>
-                        <Button onClick={ () => {
-                            close();
-                            handleSubmit()
-                        }}>Submit</Button>
+                        <br/>
+                        <br/>
+                        <Button 
+                            variant="contained"
+                            onClick={ () => {
+                                close();
+                                handleSubmit()
+                        }}>
+                            Submit
+                        </Button>
                     </div>
                 </div>
         )
