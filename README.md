@@ -11,6 +11,10 @@
 ## The app
 ### Home Page
 ![Home](https://github.com/Raymond2200/WildLifeSpotter/blob/main/images/Home-map.PNG)
+### Add Spots
+![AddSpots](https://github.com/Raymond2200/WildLifeSpotter/blob/main/images/Add-Spot.PNG)
+### List View
+![ListView](https://github.com/Raymond2200/WildLifeSpotter/blob/main/images/Capture.PNG)
 
 
 MVP:
