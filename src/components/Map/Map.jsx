@@ -56,17 +56,13 @@ class Map extends Component {
         let savedVals = [];
         let spotteds = this.props.spotteds;
         let prev_infowindow = false;
-        function trimDate(dbItemDate) {
-            let newTime = [];
-            const months = [ "January", "February", "March", "April", "May", "June", 
-           "July", "August", "September", "October", "November", "December" ];
-            newTime = dbItemDate.split(/-|T|:/)
-            while(newTime[1][0] === '0') {
-                newTime[1] = newTime[1].substring(1)
-            }
-            let monthName = months[newTime[1] - 1]
-            newTime.splice(1, 1, monthName)
-        return `Spotted on ${newTime[1]} ${newTime[2]} at ${newTime[3]}:${newTime[4]}`
+        let newTime = undefined
+        let convertTime = (time) => {
+            let test = new Date(time)
+            test = test.toString()
+            newTime = test.split(/\s|:/)
+
+            return `Spotted on ${newTime[1]} ${newTime[2]} at ${newTime[4]}:${newTime[5]}`
         }
         spotteds.forEach((spot) => {
             let animalType = spot.animalType;
@@ -74,15 +70,17 @@ class Map extends Component {
                 lat: spot.location.coordinates[1], 
                 lng: spot.location.coordinates[0]}
             let description = spot.description;
-            let dateTime = trimDate(spot.updatedAt)
+            let dateTime = convertTime(spot.updatedAt)
             savedVals.push([animalType, location, description, dateTime]);
         });
         savedVals.forEach((spot) => {
             const contentString =
-                `<div class="pin">` +
+                `<div id="content">` +
                 `<h1 id="animalType">${spot[0]}</h1>` +
-                `<div id="description">${spot[2]}</div>` +
-                `<div id="dateTime">${spot[3]}</div>` +
+                `<div id="bodyContent">` +
+                `<p id="description" style="text-align: left;">${spot[2]}</p>` +
+                `<p id="dateTime" style="text-align: left;">${spot[3]}</p>` +
+                `</div>` +
                 `</div>`;
             const infowindow = new window.google.maps.InfoWindow({
                 content: contentString,
@@ -129,7 +127,7 @@ class Map extends Component {
             const shape = {
                 coords: [10, 10, 10, 65, 70, 65, 70, 10],
                 type: "poly",
-              };
+            };
             let marker = new window.google.maps.Marker({
                 position: spot[1], 
                 map: this.mapRef,

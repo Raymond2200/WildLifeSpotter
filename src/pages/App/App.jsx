@@ -15,7 +15,7 @@ class App extends Component {
     state = {
         lat: null,
         lng: null,
-        user:null,
+        user: null,
         listview: false,
         spotteds: [],
         isLoading: false,
@@ -93,7 +93,6 @@ class App extends Component {
         <div className="App">
             <Link to="/">
                 <header>
-                    {/* <object fontFamily="AzoSans" data="Logo2.svg" alt="logo"></object> */}
                     <img src="Logo-png.png" alt="logo"></img>
                 </header>
             </Link>
