@@ -98,7 +98,8 @@ let SpotForm = forwardRef((props, ref) => {
                         <Button onClick={ () => {
                             close();
                             handleSubmit()
-                        }}>Submit</Button>
+                            }}>Submit
+                        </Button>
                     </div>
                 </div>
         )

@@ -20,7 +20,7 @@ function ListPage(props) {
             var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
             var d = R * c; // Distance in km
             if (d < 1) {
-                return "< 1 KM away, keep a look out!"
+                return "< 1"
             }
                 return d.toFixed(1);
         }
@@ -32,7 +32,7 @@ function ListPage(props) {
         let convertTime= (time) =>{
             let test = new Date(time)
             test = test.toString()
-            newTime = test.split(' ')
+            newTime = test.split(/\s|:/)
         }
 
         let markerIcon = ""
@@ -70,10 +70,12 @@ function ListPage(props) {
                     {setIcon(spottedAnimal.animalType)}
                     <li className="list-head"><img alt="icon" className="list-head-image" src={markerIcon}/></li>
                     {convertTime(spottedAnimal.updatedAt)}
-                    <li className="list-seen">{`Seen at: ${newTime[1]}, ${newTime[2]} - ${newTime[4]}`}</li>
-                    <li className="list-user">{`User: ${spottedAnimal.user.username}`}</li>
-                    <li className="list-comment">{`Comment: ${spottedAnimal.description}`}</li>
-                    <li className="list-distance">{`Distance: ${getDistanceFromLatLonInKm(lat, lng, spottedAnimal.location.coordinates[1], spottedAnimal.location.coordinates[0])}`}</li>
+                    <div id="user-seen-distance">
+                        <li className="list-seen">{`${newTime[1]}, ${newTime[2]} - ${newTime[4]} : ${newTime[5]}`}</li>
+                        <li className="list-user">{`${spottedAnimal.user.username}`}</li>
+                        <li className="list-distance">{`${getDistanceFromLatLonInKm(lat, lng, spottedAnimal.location.coordinates[1], spottedAnimal.location.coordinates[0])} km`}</li>
+                    </div>
+                    <li className="list-comment">{`Comments: ${spottedAnimal.description}`}</li>
                     <li className="list-hr"><hr/></li>
                 </div>               
             ))}

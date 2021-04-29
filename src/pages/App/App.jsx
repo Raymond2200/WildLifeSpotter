@@ -29,7 +29,6 @@ class App extends Component {
         })
     }
     handleLogout = () => {
-        console.log("logout hit")
         localStorage.clear();
         this.setState({user: null})
         return <Redirect to="/"/>
@@ -120,6 +119,7 @@ class App extends Component {
                                     lat={this.state.lat}
                                     spotteds={this.state.spotteds}
                                     handleDragMarker={this.handleDragMarker}
+                                    filter={this.state.filter}
                                 />
                             ) : ( 
                                 <ListPage
