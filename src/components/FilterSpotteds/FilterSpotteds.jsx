@@ -2,9 +2,29 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import { makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+    root: {
+      color: '#0b3939',
+      backgroundColor: 'white',
+    },
+  });
+
+const theme = createMuiTheme({
+    overrides: {
+        MuiTouchRipple: {
+            child: {
+                backgroundColor: '#000'
+            }
+        }
+    }
+});
 
 function FilterSpotteds(props) {
     const [anchorEl, setAnchorEl] = React.useState(null)
+    const classes = useStyles();
 
     const handleClick = (evnt) => {
         setAnchorEl(evnt.currentTarget)
@@ -19,14 +39,19 @@ function FilterSpotteds(props) {
 
     return (
         <div>
-            <Button 
-                variant="contained"
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                onClick={handleClick}
-            >
-                Filter
-            </Button>
+            <ThemeProvider theme={theme}>
+                <Button 
+                    classes={{
+                        root: classes.root,
+                    }}
+                    variant="contained"
+                    aria-controls="simple-menu"
+                    aria-haspopup="true"
+                    onClick={handleClick}
+                >
+                    Filter
+                </Button>
+            </ThemeProvider>
 
             <Menu
                 id="simple-menu"
