@@ -1,4 +1,4 @@
-# The Moose Tracker
+# Moose Tracks
 ### Project contributors
 * [Raymond Casgrain](https://github.com/Raymond2200)
 * [Matthew Nixon](https://github.com/mdpnixon)
