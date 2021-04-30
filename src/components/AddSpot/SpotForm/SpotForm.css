@@ -21,8 +21,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 45%;
-    width: 60%;
+    height: 400px;
+    width: 300px;
     z-index: 110;
     background-color: white;
     box-shadow: 0 0 15px rgba(0,0,0,0.8);

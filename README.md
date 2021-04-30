@@ -5,7 +5,7 @@
 * [Logan Major](https://github.com/logan858)
 
 ## Description:
-Moose Tracker is about empowering users across the content whether in remote communities, on the road, near a campsite, or in a regular suburban neighborhood. Moose tracker enables it’s users to view sightings of potentially hazardous or inconvenient wildlife in there area. This allows users to plan and react accordingly. To add a spot a user simply needs to create an account with us and by adding a spot they can alert users in their local area of the animals approximate location. Spots do timeout so there is no need to worry about removing your old spots. 
+Moose Tracks is about empowering users across the continent whether in remote communities, on the road, near a campsite, or in a regular suburban neighborhood. Moose tracks enables it’s users to view sightings of potentially hazardous or inconvenient wildlife in there area. This allows users to plan and react accordingly. To add a spot a user simply needs to create an account with us and by adding a spot they can alert users in their local area of the animals approximate location. Spots do timeout so there is no need to worry about removing your old spots. 
 
 
 ### Home Page
@@ -21,11 +21,13 @@ Moose Tracker is about empowering users across the content whether in remote com
 
 
 ## Website Link
-No link yet
+[Click here to get tracking!](https://moosetracks.herokuapp.com)
 
 ## Technologies Utilized
 * Mongoose/MongoDB
 * React
+* Javascript
+* CSS
 * Google Maps API
 * JWT
 * Node.JS
