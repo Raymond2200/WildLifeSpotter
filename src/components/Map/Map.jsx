@@ -118,7 +118,7 @@ class Map extends Component {
                 }
             } else if (spot[0] === 'Skunk'){
                 svgMarker = {
-                    url: "icons/Skunk.svg",
+                    url: "icons/skunk.svg",
                     anchor: new window.google.maps.Point(25,50),
                     scaledSize: new window.google.maps.Size(80,80)
                 }
